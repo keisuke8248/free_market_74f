@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  category: one
+  brand: one
+  name: MyString
+  price: MyString
+  description: MyString
+  status: MyString
+  judgment: MyString
+  size: MyString
+  cost: MyString
+  days: MyString
+  prefecture_id: MyString
+
+two:
+  user: two
+  category: two
+  brand: two
+  name: MyString
+  price: MyString
+  description: MyString
+  status: MyString
+  judgment: MyString
+  size: MyString
+  cost: MyString
+  days: MyString
+  prefecture_id: MyString
