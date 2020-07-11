@@ -14,10 +14,12 @@
       <div class="header__title">
         <%= link_to "mercari", root_path, class: "header__title--text" %>
       </div>
-      <div class="header__right">
-        <%= link_to "新規会員", new_user_registration_path, class: "header__right--btn" %>
-        <%= link_to "ログイン", new_user_session_path, class: "header__right--btn" %>
-      </div>
+        <% if user_signed_in? %>
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "header__right--btn" %>
+        <% else %>
+          <%= link_to "新規会員", new_user_registration_path, class: "header__right--btn" %>
+          <%= link_to "ログイン", new_user_session_path, class: "header__right--btn" %>
+        <% end %>
     </header>
     <%= yield %>
   </body>

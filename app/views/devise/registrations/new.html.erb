@@ -5,7 +5,7 @@
 
   <div class="field">
     <%= f.label :nickname %><br />
-    <%= f.text_field :nickname, autofocus: true %>
+    <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname" %>
   </div>
 
   <div class="field">
@@ -22,9 +22,30 @@
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.label :family_name %><br />
+    <%= f.text_field :family_name, autofocus: true %>
   </div>
+
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :family_name_kana %><br />
+    <%= f.text_field :family_name_kana, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :first_name_kana %><br />
+    <%= f.text_field :first_name_kana, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :birth_day %><br />
+    <%= f.date_select :birth_day, use_month_numbers: true,start_year: 1930, end_year: (Time.now.year - 10), default: Date.new(Time.now.year - 20) %>
+  </div>
+
 
   <div class="actions">
     <%= f.submit "Sign up" %>
