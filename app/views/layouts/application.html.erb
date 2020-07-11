@@ -10,6 +10,15 @@
   </head>
 
   <body>
+    <header class="header">
+      <div class="header__title">
+        <%= link_to "mercari", root_path, class: "header__title--text" %>
+      </div>
+      <div class="header__right">
+        <%= link_to "新規会員", new_user_registration_path, class: "header__right--btn" %>
+        <%= link_to "ログイン", new_user_session_path, class: "header__right--btn" %>
+      </div>
+    </header>
     <%= yield %>
   </body>
 </html>
