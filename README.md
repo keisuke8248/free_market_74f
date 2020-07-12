@@ -20,8 +20,8 @@
 
 ### Association
 - has_many :products dependent: :destroy
-- has_to :destination dependent: :destroy
-- has_to :card dependent: :destroy
+- has_one :destination dependent: :destroy
+- has_one :card dependent: :destroy
 
 
 ## destinationテーブル
@@ -88,9 +88,9 @@
 |user_id|integer|null: false, foreign_key: true|
 
 ### Association
-- belongs_to :user dependent: :destroy
-- belongs_to :category dependent: :destroy
-- belongs_to :brand dependent: :destroy
+- belongs_to :user
+- belongs_to :category
+- belongs_to :brand
 - has_many :images dependent: :destroy
 
 
