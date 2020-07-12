@@ -24,7 +24,7 @@
 - has_one :card dependent: :destroy
 
 
-## destinationテーブル
+## destinationsテーブル
 
 |Column|Type|Options|
 |------|----|-------|
@@ -45,7 +45,7 @@
 - belongs_to :user
 
 
-## cardテーブル
+## cardsテーブル
 
 |Column|Type|Options|
 |------|----|-------|
@@ -57,7 +57,7 @@
 - belongs_to :user
 
 
-## categoryテーブル
+## categoriesテーブル
 
 |Column|Type|Options|
 |------|----|-------|
@@ -69,7 +69,7 @@
 ※ancestryは、gem ancestryを使用するため。
 
 
-## productテーブル
+## productsテーブル
 
 |Column|Type|Options|
 |------|----|-------|
@@ -94,7 +94,7 @@
 - has_many :images dependent: :destroy
 
 
-## imageテーブル
+## imagesテーブル
 
 |Column|Type|Options|
 |------|----|-------|
@@ -106,7 +106,7 @@
 - belongs_to :product
 
 
-## brandテーブル
+## brandsテーブル
 
 |Column|Type|Options|
 |------|----|-------|
