@@ -1,10 +1,14 @@
-%p.imageclass
-  = image_tag @product.image.image
+.product__name
+  = @product.name
+
+- @product.images.each do |image|
+  %p.imageclass
+    = image_tag image.image
+
 
 .product__price
   = @product.price + "円"
-.product__name
-  = @product.name
+
 
 %table{border:"1", style:"border-collapse: collapse"} 
   %tr
@@ -46,6 +50,6 @@
 - unless user_signed_in?
   = link_to "購入する", root_path
 
-- if user_signed_in?
+- if user_signed_in? && current_user.id == @product.user_id
   = link_to "編集", edit_product_path(@product.id)
   = link_to "削除", product_path(@product.id), method: "DELETE"
