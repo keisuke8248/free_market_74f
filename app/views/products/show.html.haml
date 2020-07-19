@@ -1,6 +1,8 @@
 .product__name
   = @product.name
 
+= image_tag @product.images.first.image
+
 - @product.images.each do |image|
   %p.imageclass
     = image_tag image.image
