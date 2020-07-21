@@ -19,8 +19,7 @@
 |birth_day|date|null: false|
 
 ### Association
-- has_many :buyer_records, class_name: 'Product', dependent: :destroy
-- has_many :seller_records, class_name: 'Product', dependent: :destroy
+- has_many :products dependent: :destroy
 - has_one :destination dependent: :destroy
 - has_one :card dependent: :destroy
 
@@ -86,12 +85,10 @@
 |category_id|integer|null: false, foreign_key: true|
 |brand_id|integer|null: false, foreign_key: true|
 |shipping_id|integer|null: false, foreign_key: true|
-|buyer_id|integer|null: false, foreign_key: true|
-|seller_id|integer|null: false, foreign_key: true|
+|user_id|integer|null: false, foreign_key: true|
 
 ### Association
-- belongs_to :buyer, class_name: "User"
-- belongs_to :seller, class_name: "User"
+- belongs_to :user
 - belongs_to :category
 - belongs_to :brand
 - has_many :images dependent: :destroy
