@@ -1,3 +1,226 @@
 // Place all the styles related to the destinations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  width: 100%;
+  margin: 0 auto;
+  background-color: rgb(241, 241, 241);
+}
+
+main {
+  padding: 24px 32px 40px;
+  width: 636px;
+  margin: 0 auto;
+  border-top: 1px solid #f5f5f5;
+  background-color: #fff;
+}
+
+.title {
+  margin: 0 auto;
+  font-size: 18px;
+  padding: 12px 32px;
+  width: 636px;
+  text-align: center;
+  font-weight: 550;
+  background-color: #fff;
+}
+
+
+
+.field__top {
+  width: 350px;
+  margin: 0 auto;
+  input[type="text"], 
+  input[type="email"], 
+  input[type="password"],
+  input[type="date"]
+  {
+    margin-top: 8px;
+    font-size: 16px;
+    width: 309px;
+    height: 28px;
+    padding: 10px 16px 8px 16px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 4px;
+  }
+  &__label {
+      font-size: 14px;
+      font-weight: 600;
+    span {
+      background-color: #2cccd4;
+      color: #fff;
+      font-weight: 300;
+      border-radius: 2px;
+      font-size: 12px;
+      padding: 3px;
+      margin: 0 0 0 8px;
+      padding: 2px 4px;
+    }
+  }
+}
+
+.field__next {
+  width: 350px;
+  margin: 0 auto;
+  margin-top: 8px;
+  input[type="text"], 
+  input[type="email"], 
+  input[type="password"],
+  input[type="date"]
+  {
+    font-size: 16px;
+    width: 309px;
+    height: 28px;
+    padding: 10px 16px 8px 16px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 4px;
+  }
+}
+
+.field {
+  width: 350px;
+  margin: 0 auto;
+  margin-top: 24px;
+  input[type="text"], 
+  input[type="email"], 
+  input[type="password"],
+  input[type="date"]
+  {
+    margin-top: 8px;
+    font-size: 16px;
+    width: 309px;
+    height: 28px;
+    padding: 10px 16px 8px 16px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 4px;
+  }
+  &__label {
+      font-size: 14px;
+      font-weight: 600;
+    span {
+      background-color: #2cccd4;
+      color: #fff;
+      font-weight: 300;
+      border-radius: 2px;
+      font-size: 12px;
+      padding: 3px;
+      margin: 0 0 0 8px;
+      padding: 2px 4px;
+    }
+    &__parallel {
+      display: flex;
+      justify-content: space-between;
+      input[type="text"] {
+        width: 131.5px;
+        height: 28px;
+        padding: 10px 16px 8px;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 4px;
+        margin: 8px 8px 0 0;
+      }
+    }
+  }
+  &__label__option {
+    font-size: 14px;
+    font-weight: 600;
+    span {
+      background-color: #ccc;
+      color: #fff;
+      font-weight: 300;
+      border-radius: 2px;
+      font-size: 12px;
+      padding: 3px;
+      margin: 0 0 0 8px;
+      padding: 2px 4px;
+    }
+  }
+
+  &__confirmation {
+    font-size: 14px;
+    font-weight: 200;
+    color: rgb(53, 53, 53);
+  }
+
+  &__help {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    line-height: 43px;
+    font-weight: 200;
+    color: rgb(53, 53, 53);
+    .input__select {
+      width: 93px;
+      height: 43px;
+      padding-left: 6px;
+    }
+  }
+  &__attention {
+    font-size: 14px;
+    font-weight: 100;
+    color: #888;
+    margin-top: 8px;
+  }
+}
+
+#error_explanation {
+  color: #2cccd4;
+  font-size: 14px;
+  width: 350px;
+  margin: 0 auto;
+  margin-top: 7px;
+}
+
+.btn {
+  background-color: #2cccd4;
+  border: 1px solid #2cccd4;
+  color: #fff;
+  width: 341px;
+  height: 48px;
+  font-size: 14px;
+  border-radius: 4px;
+  margin: 0 auto;
+  margin-top: 24px;
+}
+
+.input__select {
+  margin-top: 8px;
+  margin-bottom: 0;
+  font-size: 16px;
+  width: 343px;
+  height: 48px;
+  padding: 10px 16px 8px 16px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+select::-ms-expand {
+	display: none;
+}
+select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin-bottom: 20px;
+	padding: 7px 30px 7px 10px;
+	font-size: 93%;
+	line-height: 1.1em;
+	border-radius: 5px;
+	border: none;
+	background-image: url("/assets/矢印アイコン　下4.svg");
+	background-repeat: no-repeat;
+	background-size: 20px 17px;
+	background-position: right 15px center;
+}
+.field_with_errors input {
+  outline: 0;
+  border-color:#2cccd4;
+  background-color:#fff;
+}
