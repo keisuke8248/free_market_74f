@@ -4,6 +4,8 @@ class Destination < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
   belongs_to :user
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to_active_hash :prefecture
 
   validates :family_name, presence: true
   validates :first_name, presence: true
