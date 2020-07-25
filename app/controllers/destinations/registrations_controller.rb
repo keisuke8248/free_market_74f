@@ -67,6 +67,6 @@ class Destinations::RegistrationsController < Devise::RegistrationsController
 
   private
   def destination_params
-    params.require(:destination).permit(:user_id, :family_name, :first_name, :family_name_kana, :first_name_kana, :post_code, :prefecture, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id)
+    params.require(:destination).permit(:user_id, :family_name, :first_name, :family_name_kana, :first_name_kana, :post_code, :prefecture_id, :city, :address, :building_name, :phone_number).merge(user_id: current_user.id)
   end
 end
