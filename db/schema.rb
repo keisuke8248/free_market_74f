@@ -83,7 +83,8 @@ ActiveRecord::Schema.define(version: 2020_07_19_095719) do
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "buyer_id"
+    t.bigint "seller_id", null: false
     t.bigint "category_id", null: false
     t.string "brand"
     t.string "name", null: false
@@ -94,13 +95,12 @@ ActiveRecord::Schema.define(version: 2020_07_19_095719) do
     t.string "size"
     t.string "cost", null: false
     t.string "days", null: false
-    t.integer "prefecture_id", default: 0, null: false
-    t.integer "seller_id"
-    t.integer "buyer_id"
+    t.integer "prefecture_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_products_on_buyer_id"
     t.index ["category_id"], name: "index_products_on_category_id"
-    t.index ["user_id"], name: "index_products_on_user_id"
+    t.index ["seller_id"], name: "index_products_on_seller_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -128,5 +128,6 @@ ActiveRecord::Schema.define(version: 2020_07_19_095719) do
   add_foreign_key "destinations", "users"
   add_foreign_key "images", "products"
   add_foreign_key "products", "categories"
-  add_foreign_key "products", "users"
+  add_foreign_key "products", "users", column: "buyer_id"
+  add_foreign_key "products", "users", column: "seller_id"
 end

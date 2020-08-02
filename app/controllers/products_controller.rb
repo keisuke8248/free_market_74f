@@ -22,13 +22,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def category_children
-    @category_children = Category.find("#{params[:parent_id]}").children
-  end
-
-  def category_grandchildren
-    @category_grandchildren = Category.find("#{params[:child_id]}").children
-  end
 
   def edit
   end
@@ -40,8 +33,7 @@ class ProductsController < ApplicationController
   end
 
   private
-
   def product_params
-    params.require(:product).permit(:name, :category_id, :brand,:status, :cost, :size, :prefecture_id, :days, :price, :description, images_attributes: [:image]).merge(user_id: current_user.id)
+    params.require(:product).permit(:id, :buyer_id, :name, :category_id, :brand, :status, :cost, :size, :judgment, :prefecture_id, :days, :price, :description, :seller_id, images_attributes: [:image]).merge(seller_id: current_user.id)
   end
 end
