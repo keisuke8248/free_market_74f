@@ -86,3 +86,5 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'
 end
+gem 'rails-i18n', '~> 5.1'
+gem 'devise-i18n'

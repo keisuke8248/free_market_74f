@@ -19,7 +19,8 @@
 |birth_day|date|null: false|
 
 ### Association
-- has_many :products dependent: :destroy
+- has_many :buyer_records, class_name: 'Product', dependent: :destroy
+- has_many :seller_records, class_name: 'Product', dependent: :destroy
 - has_one :destination dependent: :destroy
 - has_one :card dependent: :destroy
 
