@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 2020_07_08_122342) do
   end
 
   create_table "products", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "buyer_id", null: false
+    t.bigint "buyer_id"
     t.bigint "seller_id", null: false
     t.bigint "category_id", null: false
     t.bigint "brand_id", null: false
@@ -84,11 +84,8 @@ ActiveRecord::Schema.define(version: 2020_07_08_122342) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "nickname", null: false
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.string "email", null: false
+    t.string "user_password", null: false
     t.string "user_image"
     t.string "family_name", null: false
     t.string "first_name", null: false
@@ -98,8 +95,6 @@ ActiveRecord::Schema.define(version: 2020_07_08_122342) do
     t.text "introduction"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "cards", "users"
