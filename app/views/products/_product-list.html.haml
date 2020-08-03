@@ -6,8 +6,8 @@
       新規投稿商品
   .product--list
     - count = 0
-    - @products.reverse_each do |product|
-      - next if product.buyer_id == nil
+    - @products.each do |product|
+      - next if product.buyer_id != nil
       - count += 1
       - break if count > 4
       .product--list__product.effect-fade
