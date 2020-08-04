@@ -78,24 +78,25 @@
 |price|string|null: false|
 |description|string|null: false|
 |status|string|null: false|
-|size|string|null: false|
+|size|string|
 |cost|string|null: false|
 |days|string|null: false|
-|prefecture_id|string|null: false|
+|prefecture_id|integer|null: false|
 |judgment|string||
-|category_id|integer|null: false, foreign_key: true|
-|brand_id|integer|null: false, foreign_key: true|
-|shipping_id|integer|null: false, foreign_key: true|
-|buyer_id|integer|null: false, foreign_key: true|
-|seller_id|integer|null: false, foreign_key: true|
+|category_id|references|null: false, foreign_key: true|
+|brand|string|
+|seller_id|references|null: false, foreign_key: : { to_table: :users }| 
+|buyer_id|references｜foreign_key: { to_table: :users }|
+
 
 ### Association
-- belongs_to :buyer, class_name: "User"
-- belongs_to :seller, class_name: "User"
-- belongs_to :category
-- belongs_to :brand
+- belongs_to :user, optional: true
+- belongs_to :category, optional: true
+- belongs_to :buyer, class_name: "User", optional: true, foreign_key: "buyer_id"
+- belongs_to :seller, class_name: "User", optional: true, foreign_key: "seller_id"
 - has_many :images dependent: :destroy
-
+- accepts_nested_attributes_for :images,  allow_destroy: true
+- belongs_to_active_hash :prefecture
 
 ## imagesテーブル
 

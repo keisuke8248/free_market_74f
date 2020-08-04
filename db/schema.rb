@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_08_122342) do
+ActiveRecord::Schema.define(version: 2020_07_19_095719) do
+
+  create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "brands", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -29,9 +50,10 @@ ActiveRecord::Schema.define(version: 2020_07_08_122342) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
-    t.string "ancestry"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_categories_on_ancestry"
   end
 
   create_table "destinations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -64,19 +86,18 @@ ActiveRecord::Schema.define(version: 2020_07_08_122342) do
     t.bigint "buyer_id"
     t.bigint "seller_id", null: false
     t.bigint "category_id", null: false
-    t.bigint "brand_id", null: false
+    t.string "brand"
     t.string "name", null: false
     t.string "price", null: false
     t.string "description", null: false
     t.string "status", null: false
     t.string "judgment"
-    t.string "size", null: false
+    t.string "size"
     t.string "cost", null: false
     t.string "days", null: false
-    t.string "prefecture_id", null: false
+    t.integer "prefecture_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["brand_id"], name: "index_products_on_brand_id"
     t.index ["buyer_id"], name: "index_products_on_buyer_id"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["seller_id"], name: "index_products_on_seller_id"
@@ -97,10 +118,10 @@ ActiveRecord::Schema.define(version: 2020_07_08_122342) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "cards", "users"
   add_foreign_key "destinations", "users"
   add_foreign_key "images", "products"
-  add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "users", column: "buyer_id"
   add_foreign_key "products", "users", column: "seller_id"

@@ -18,3 +18,4 @@ class Prefecture < ActiveHash::Base
       {id: 46, name: '鹿児島県'}, {id: 47, name: '沖縄県'}, {id: 48, name: '未定'}
   ]
 end
+
