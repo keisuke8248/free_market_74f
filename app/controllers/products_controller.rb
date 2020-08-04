@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   def index
     @category_parent = Category.where(ancestry: nil)
+    @products = Product.all.order(id: "DESC")
   end
 
   def show
