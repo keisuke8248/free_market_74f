@@ -1,2 +1,203 @@
-= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "header__right--btn"
-= link_to "送付先住所登録", new_destination_registration_path, class: "header__right--btn"
+%link{:href => "https://use.fontawesome.com/releases/v5.6.1/css/all.css", :rel => "stylesheet"}/
+%meta{content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0", name: "viewport"}
+= stylesheet_link_tag "users", :media => "all"
+.breadcrumbs
+  %ol
+    %li
+      = link_to "フリマ", root_path, class: "breadcrumbs__btn"
+    %li
+      %i.fas.fa-angle-right
+    %li.span マイページ
+.container
+  .content
+    .mypage__background
+      %a{:href => ""}
+        .mypage__icon
+          %img{:src => "/assets/material/icon/member_photo_noimage_thumb.png"}/
+        %p.mypage__name
+          = @user.nickname
+        %p.mypage__number
+          = "評価 0"
+          = "出品数 0"
+    .area
+      %input#tab1{:checked => "checked", :name => "tab_name_1", :type => "radio"}/
+      %label.tab__class{:for => "tab1"} お知らせ
+      .content__class
+        %ul
+          %li
+            %a.item__link{:href => ""}
+              %figure
+              .item__body
+                .item__text 《おくる・もらう》家族や友だちにメッセージカードをおくって2人でP1,000のチャンス！
+                %time
+                  %i.far.fa-clock
+                    22 時間前
+              %i.fas.fa-angle-right
+          %li
+            %a.item__link{:href => ""}
+              %figure
+              .item__body
+                .item__text 《購入するなら今が絶対お得♪》+20％還元キャンペーン開催中！
+                %time
+                  %i.far.fa-clock
+                    2 日前
+              %i.fas.fa-angle-right
+          %li
+            %a.item__link{:href => ""}
+              %figure
+              .item__body
+                .item__text 《最大P800》お客さま限定のお得なキャンペーン開始！
+                %time
+                  %i.far.fa-clock
+                    52 分前
+              %i.fas.fa-angle-right             
+          %li
+            %a.item__link{:href => ""}
+              %figure
+              .item__body
+                .item__text 《8/2まで！》サーティワンのレギュラーシングルが約半額！メルペイクーポン配信中
+                %time
+                  %i.far.fa-clock
+                    3 日前
+              %i.fas.fa-angle-right
+          %li
+            %a.item__link{:href => ""}
+              %figure
+              .item__body
+                .item__text 《購入するなら今が絶対お得♪》+20％還元キャンペーン開催中！
+                %time
+                  %i.far.fa-clock
+                    4 日前
+              %i.fas.fa-angle-right
+          %li.mypage-go-list
+            = link_to do
+              一覧を見る
+      %input#tab2{:name => "tab_name_1", :type => "radio"}/
+      %label.tab__class{:for => "tab2"} やることリスト
+      .content__class
+        %ul
+          .not-found
+          .not-found__text
+            現在、やることリストはありません
+      .mypage-tab-head
+        購入した商品
+    .area
+      %input#tab3{:checked => "checked", :name => "tab_name_2", :type => "radio"}/
+      %label.tab__class{:for => "tab3"} 取引中
+      .content__class
+        %ul
+          .not-found
+          .not-found__text
+            取引中の商品がありません
+      %input#tab4{:name => "tab_name_2", :type => "radio"}/
+      %label.tab__class{:for => "tab4"} 過去の取引
+      .content__class
+        %ul
+          .not-found
+          .not-found__text
+            過去に取引した商品がありません
+  .nav
+    %ul
+      %li
+        %a.active{:href => ""}
+          マイページ
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          お知らせ
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          やることリスト
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          いいね！一覧
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          出品する
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          下書き一覧
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          出品した商品 - 出品中
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          出品した商品 - 取引中
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          出品した商品 - 売却済み
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          購入した商品 - 取引中
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          購入した商品 - 過去の取引
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          ニュース一覧
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          評価一覧
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          ガイド
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          お問い合わせ
+          %i.fas.fa-angle-right
+    .nav__head
+      = "メルペイ"
+    %ul
+      %li
+        = link_to do
+          売上・振込申請
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          ポイント
+          %i.fas.fa-angle-right
+    .nav__head
+      = "設定"
+    %ul
+      %li
+        = link_to do
+          プロフィール
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          発行元・お届け先住所変更
+          %i.fas.fa-angle-right
+      %li
+        = link_to cards_path do
+          支払い方法
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          メール/パスワード
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          本人情報
+          %i.fas.fa-angle-right
+      %li
+        = link_to do
+          電話番号の確認
+          %i.fas.fa-angle-right
+      %li
+        = link_to destroy_user_session_path, method: :delete do
+          ログアウト
+          %i.fas.fa-angle-right
+= render 'layouts/footer'
