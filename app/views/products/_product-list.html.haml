@@ -1,0 +1,23 @@
+= stylesheet_link_tag "_product-list", :media => "all"
+
+.main
+  .header
+    .pickup--category
+      ピックアップカテゴリー
+    = link_to "#", { class: 'pickup--title'} do
+      新規投稿商品
+  .product--list
+    - count = 0
+    - @products.each do |product|
+      - next if product.buyer_id != nil
+      - count += 1
+      - break if count > 4
+      .product--list__product.effect-fade
+        = link_to "/products/#{product.id}" do
+          = image_tag product.images.first.image, { class: 'product--list__product__image'}
+          .product--list__product__content
+            .product--list__product__name
+              #{product.name}
+            %ul
+              %li ¥#{product.price}(税込)
+              %li #{product.judgment}
