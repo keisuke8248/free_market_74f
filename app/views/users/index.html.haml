@@ -11,9 +11,9 @@
 .container
   .content
     .mypage__background
-      %a{:href => ""}
+      = link_to do       
         .mypage__icon
-          %img{:src => "/assets/material/icon/member_photo_noimage_thumb.png"}/
+          = image_tag("/assets/material/icon/member_photo_noimage_thumb.png")
         %p.mypage__name
           = @user.nickname
         %p.mypage__number
@@ -25,7 +25,7 @@
       .content__class
         %ul
           %li
-            %a.item__link{:href => ""}
+            = link_to "", class: "item__link" do
               %figure
               .item__body
                 .item__text 《おくる・もらう》家族や友だちにメッセージカードをおくって2人でP1,000のチャンス！
@@ -34,7 +34,7 @@
                     22 時間前
               %i.fas.fa-angle-right
           %li
-            %a.item__link{:href => ""}
+            = link_to "", class: "item__link" do
               %figure
               .item__body
                 .item__text 《購入するなら今が絶対お得♪》+20％還元キャンペーン開催中！
@@ -43,7 +43,7 @@
                     2 日前
               %i.fas.fa-angle-right
           %li
-            %a.item__link{:href => ""}
+            = link_to "", class: "item__link" do
               %figure
               .item__body
                 .item__text 《最大P800》お客さま限定のお得なキャンペーン開始！
@@ -52,7 +52,7 @@
                     52 分前
               %i.fas.fa-angle-right             
           %li
-            %a.item__link{:href => ""}
+            = link_to "", class: "item__link" do
               %figure
               .item__body
                 .item__text 《8/2まで！》サーティワンのレギュラーシングルが約半額！メルペイクーポン配信中
@@ -61,7 +61,7 @@
                     3 日前
               %i.fas.fa-angle-right
           %li
-            %a.item__link{:href => ""}
+            = link_to "", class: "item__link" do
               %figure
               .item__body
                 .item__text 《購入するなら今が絶対お得♪》+20％還元キャンペーン開催中！
@@ -99,7 +99,7 @@
   .nav
     %ul
       %li
-        %a.active{:href => ""}
+        = link_to "", class: "active" do
           マイページ
           %i.fas.fa-angle-right
       %li
