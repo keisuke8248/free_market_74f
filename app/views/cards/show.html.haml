@@ -1,2 +1,7 @@
-%h1 Cards#show
-%p Find me in app/views/cards/show.html.erb
+クレジットカード一覧
+
+= "************" + @card_information.last4
+= @card_information.exp_month.to_s + "/" + @card_information.exp_year.to_s[ 2 ... 4 ]
+= image_tag("/assets/material/logo/#{@card_src}")
+
+= link_to "削除する", card_path, method: :delete
