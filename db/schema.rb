@@ -128,6 +128,5 @@ ActiveRecord::Schema.define(version: 2020_07_19_095719) do
   add_foreign_key "destinations", "users"
   add_foreign_key "images", "products"
   add_foreign_key "products", "categories"
-  add_foreign_key "products", "users", column: "buyer_id"
   add_foreign_key "products", "users", column: "seller_id"
 end
