@@ -1,0 +1,20 @@
+購入内容の確認
+
+= image_tag @product.images.first.image
+
+支払い金額
+= @product.price
+円
+
+- if @card_information.blank?
+  %br /
+- else
+  = "************" + @card_information.last4
+  - month = @card_information.exp_month.to_s
+  - year = @card_information.exp_year.to_s[ 2 ... 4 ]
+  = month + "/" + year
+  = image_tag("/assets/material/logo/#{@card_src}")
+  = link_to "変更する", card_product_purchase_path
+
+= form_tag(action: :pay, method: :post) do
+  = submit_tag '購入する'
