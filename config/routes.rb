@@ -34,11 +34,5 @@ Rails.application.routes.draw do
   resources :images
   resources :brands
   resources :categorys
-  resources :cards, only: [:show, :new, :destroy] do
-    collection do
-      post 'pay'
-      post 'show'
-      post 'new'
-    end
-  end
+  resources :cards
 end
