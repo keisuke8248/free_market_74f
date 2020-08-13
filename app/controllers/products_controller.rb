@@ -44,7 +44,7 @@ class ProductsController < ApplicationController
     if @product.seller_id == current_user.id && @product.destroy
       redirect_to root_path
     else
-      render :show
+      redirect_to product_path(product.id)
     end
   end
 
