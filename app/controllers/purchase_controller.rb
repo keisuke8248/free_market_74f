@@ -1,11 +1,12 @@
-class CardsController < ApplicationController
+class PurchaseController < ApplicationController
 
-  require "payjp"
+  require 'payjp'
 
   def show
+    @product = Product.find(params[:id])
     card = Card.find_by(user_id: current_user.id)
     if card.blank?
-      redirect_to action: :new
+      redirect_to controller: :cards, action: :new
     else
       Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
       customer = Payjp::Customer.retrieve(card.customer_id)
@@ -28,37 +29,51 @@ class CardsController < ApplicationController
     end
   end
 
-  def new
-    card = Card.find_by(user_id: current_user.id)
-    redirect_to action: :show if card.present?
-  end
-
-  def destroy
-    card = Card.find_by(user_id: current_user.id)
-    if card.blank?
-    else
-      Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
-      customer = Payjp::Customer.retrieve(card.customer_id)
-      customer.delete
-      card.delete
-    end
-      redirect_to action: :new
-  end
-
   def pay
+    @product = Product.find(params[:id])
+    seller_id = @product.seller_id
+    buyer_id = @product.buyer_id
+    if buyer_id.present?
+      redirect_to action: :fail
+    elsif seller_id == current_user.id
+      redirect_to root_path
+    else
+      card = Card.find_by(user_id: current_user.id)
+      Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
+      Payjp::Charge.create(
+      amount: @product.price,
+      customer: card.customer_id,
+      currency: 'jpy',
+      )
+      @product.update(buyer_id: current_user.id)
+      redirect_to action: :done
+    end
+  end
+
+  def done
+  end
+
+  def fail
+  end
+
+  def card
+  end
+
+  def create
+    @card = Card.find_by(user_id: current_user.id)
     Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
     if params['payjp-token'].blank?
-      redirect_to action: :new
+      redirect_to action: :card
     else
       customer = Payjp::Customer.create(
       card: params['payjp-token'],
       )
-      @card = Card.new(user_id: current_user.id, customer_id: customer.id, card_id: customer.default_card)
-      if @card.save
+      if @card.update(customer_id: customer.id, card_id: customer.default_card)
         redirect_to action: :show
       else
-        redirect_to action: :pay
+        redirect_to action: :card
       end
     end
   end
+
 end
