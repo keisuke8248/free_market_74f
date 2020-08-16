@@ -19,13 +19,13 @@
                   - else
                     = "着払い(税込)"
                 %span.product__content__info__content__price
-                  = "¥" + "#{@product.price}"
+                  = "¥" + "#{@product.price.to_i.to_s(:delimited)}"
 
         .price
           .price__title
             支払い金額
           .price__detail
-            = "¥" + "#{@product.price}"
+            = "¥" + "#{@product.price.to_i.to_s(:delimited)}"
     
         .card
           .card__header
@@ -38,7 +38,7 @@
             %p= "************" + @card_information.last4
             - month = @card_information.exp_month.to_s
             - year = @card_information.exp_year.to_s[ 2 ... 4 ]
-            %p= "有効期限" + "#{month + "/" + year}"
+            %p= "有効期限 #{month + "/" + year}"
             %p#brand= image_tag("/images/material/logo/#{@card_src}")
         
         .destination
@@ -48,11 +48,11 @@
               .destination__header__ChangingDestination
                 = link_to "変更する", "/"
           .destination__detail
-            %p= "〒" + "#{@destination.post_code}"
+            %p= "〒#{@destination.post_code}"
             %p= @product.prefecture.name
             %p= @destination.address
             %p= @destination.buidling_name if @destination.building_name.present?
-            %p= "#{@destination.family_name}" + " " + "#{@destination.first_name}"
+            %p= "#{@destination.family_name} #{@destination.first_name}"
         
         .submit
           = form_tag(action: :pay, method: :post) do
