@@ -30,7 +30,7 @@ body {
     .login-form{
       max-width: 320px;
       margin: 0 auto;
-      .box{
+      &__box{
         height: 28px;
         width: 286px;
         margin: 40px 0 0;
@@ -38,10 +38,10 @@ body {
         border-width: 1px;
         border-radius: 4px;
       }
-      .login-rememberance{
+      &__rememberance{
         margin-top: 10px;
       }
-      .login-button{
+      &__button{
         background-color: #2cccd4;
         border: 1px solid #2cccd4;
         color: #ffffff;
@@ -51,6 +51,7 @@ body {
         border-radius: 4px;
         margin: 0 auto;
         margin-top: 24px;
+        cursor: pointer;
       }
     }
     .password-forget{

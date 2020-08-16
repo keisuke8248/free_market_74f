@@ -7,14 +7,14 @@
     .login-form
       = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
         .field
-          = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "box"
+          = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "login-form__box"
         .field
-          = f.password_field :password, autocomplete: "current-password", placeholder: "パスワード", class: "box"
+          = f.password_field :password, autocomplete: "current-password", placeholder: "パスワード", class: "login-form__box"
         - if devise_mapping.rememberable?
           .field
-            = f.check_box :remember_me, class: "login-rememberance"
-            = f.label :remember_me, class: "login-rememberance"
+            = f.check_box :remember_me, class: "login-form__rememberance"
+            = f.label :remember_me, class: "login-form__rememberance"
         .actions
-          = f.submit "ログイン", class: "login-button"
+          = f.submit "ログイン", class: "login-form__button"
     .password-forget
       = link_to "パスワードをお忘れの方", new_password_path(resource_name), class: "password-forget"
