@@ -3,10 +3,14 @@ class PurchaseController < ApplicationController
   require 'payjp'
 
   def show
+    user = User.find(current_user.id)
+    @destination = user.destination
     @product = Product.find(params[:id])
     card = Card.find_by(user_id: current_user.id)
     if card.blank?
       redirect_to controller: :cards, action: :new
+    elsif @product.buyer_id.present?
+      redirect_to controller: :products, action: :show
     else
       Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
       customer = Payjp::Customer.retrieve(card.customer_id)
