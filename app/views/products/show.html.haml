@@ -33,7 +33,18 @@
             %th
               カテゴリー
             %td
-              = @product.category.name
+              - if @product.category.parent.parent.nil?
+                .products-children
+                  = link_to @product.category.parent.name, "#"
+                .products-grandchildren
+                  = link_to @product.category.name, "#"
+              - else
+                .products-info
+                  = link_to @product.category.parent.parent.name, "#"
+                .products-children
+                  = link_to @product.category.parent.name, "#"
+                .products-grandchildren
+                  = link_to @product.category.name, "#"
           %tr
             %th
               ブランド
