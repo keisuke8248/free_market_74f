@@ -3,8 +3,7 @@ class PurchaseController < ApplicationController
   require 'payjp'
 
   def show
-    user = User.find(current_user.id)
-    @destination = user.destination
+    @destination = current_user.destination
     @product = Product.find(params[:id])
     card = Card.find_by(user_id: current_user.id)
     if card.blank?
