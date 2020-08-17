@@ -13,7 +13,7 @@
                 - @product.images.each do |image|
                   %li= image_tag image.image.to_s, width: "75", height: "75"
         .itemBox__price
-          %span= "¥" + @product.price
+          %span= "¥" + @product.price.to_i.to_s(:delimited)
           .itemBox__price__detail
             %span (税込)
             %span 送料込み
@@ -49,7 +49,6 @@
             %th
               ブランド
             %td
-
               = @product.brand
           %tr
             %th
@@ -60,13 +59,13 @@
             %th
               商品の状態
             %td
-              = @product.status
+              = Status.find(@product.status).name
           %tr
             %th
               配送料の負担
               - if @product.cost.present?
                 %td
-                  = @product.cost
+                  = Cost.find(@product.cost).name
               - else
                 %td
                   送料込み (出品者負担)
@@ -79,7 +78,7 @@
             %th
               発送日の目安
             %td
-              = @product.days + "日で発送"
+              = Days.find(@product.days).name
 
         - if user_signed_in? && current_user.id == @product.seller_id
           = link_to "編集", edit_product_path(@product.id), class: "itemBox__btn"
