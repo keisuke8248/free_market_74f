@@ -1,4 +1,13 @@
-= stylesheet_link_tag "_footer", :media => "all"
+.fifth-picture
+  .fifth-picture__text
+    %h2
+      だれでもかんたん、人生を変えるフリマアプリ
+    %p
+      今すぐ無料ダウンロード！
+    .move-page
+      = link_to image_tag("/assets/material/pict/app-store.svg", class: "move-page__link-tag", id: "app-tag")
+      = link_to image_tag("/assets/material/pict/google-play.svg", class: "move-page__link-tag")
+
 .footer
   %ul.contents
     %li.content

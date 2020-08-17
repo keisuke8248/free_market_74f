@@ -1,5 +1,6 @@
-%h1 Products#index
-%p Find me in app/views/products/index.html.erb
-
+= stylesheet_link_tag "_top-page", :media => "all"
+= render 'header'
+= render 'contents'
 .wrapper
   = render "product-list"
+= render 'under'
