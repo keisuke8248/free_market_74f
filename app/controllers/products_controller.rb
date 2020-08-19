@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
   def index
     @category_parent = Category.where(ancestry: nil)
     @products = Product.all.order(id: "DESC")
+    render :layout => nil
   end
 
   def show
