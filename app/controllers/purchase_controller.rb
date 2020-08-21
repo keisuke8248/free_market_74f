@@ -3,10 +3,15 @@ class PurchaseController < ApplicationController
   require 'payjp'
 
   def show
+    @destination = current_user.destination
     @product = Product.find(params[:id])
     card = Card.find_by(user_id: current_user.id)
-    if card.blank?
+    if @product.buyer_id.present?
+      redirect_to controller: :products, action: :show
+    elsif card.blank?
       redirect_to controller: :cards, action: :new
+    elsif @destination.blank?
+      redirect_to ('/destinations/sign_up/'), id: current_user.id
     else
       Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
       customer = Payjp::Customer.retrieve(card.customer_id)
@@ -30,9 +35,9 @@ class PurchaseController < ApplicationController
   end
 
   def pay
-    @product = Product.find(params[:id])
-    seller_id = @product.seller_id
-    buyer_id = @product.buyer_id
+    product = Product.find(params[:id])
+    seller_id = product.seller_id
+    buyer_id = product.buyer_id
     if buyer_id.present?
       redirect_to action: :fail
     elsif seller_id == current_user.id
@@ -41,11 +46,11 @@ class PurchaseController < ApplicationController
       card = Card.find_by(user_id: current_user.id)
       Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
       Payjp::Charge.create(
-      amount: @product.price,
+      amount: product.price,
       customer: card.customer_id,
       currency: 'jpy',
       )
-      @product.update(buyer_id: current_user.id)
+      product.update(buyer_id: current_user.id)
       redirect_to action: :done
     end
   end
@@ -60,7 +65,7 @@ class PurchaseController < ApplicationController
   end
 
   def create
-    @card = Card.find_by(user_id: current_user.id)
+    card = Card.find_by(user_id: current_user.id)
     Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
     if params['payjp-token'].blank?
       redirect_to action: :card
@@ -68,7 +73,7 @@ class PurchaseController < ApplicationController
       customer = Payjp::Customer.create(
       card: params['payjp-token'],
       )
-      if @card.update(customer_id: customer.id, card_id: customer.default_card)
+      if card.update(customer_id: customer.id, card_id: customer.default_card)
         redirect_to action: :show
       else
         redirect_to action: :card

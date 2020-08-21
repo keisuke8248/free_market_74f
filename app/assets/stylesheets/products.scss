@@ -62,11 +62,15 @@ li {
     background-color: #3CCACE;
     display: block;
     text-align: center;
-    font-size: 14px;
+    font-size: 17px;
+    font-weight: 600;
     line-height: 56px;
     color: #fff;
     margin-bottom: 30px;
-
+    border-radius: 4px;
+  }
+  &__btn:hover {
+    background-color: #299296;
   }
  
   &__description {
