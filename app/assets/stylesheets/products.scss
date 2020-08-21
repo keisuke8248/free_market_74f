@@ -72,7 +72,19 @@ li {
   &__btn:hover {
     background-color: #299296;
   }
- 
+  &__sold {
+    background-color: #888;
+    text-align: center;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 56px;
+    color: #fff;
+    margin-bottom: 30px;
+    border-radius: 4px;
+  }
+  &__sold:hover {
+    cursor: not-allowed;
+  }
   &__description {
     line-height: 1.5;
     font-size: 18px;
