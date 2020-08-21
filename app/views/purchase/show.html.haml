@@ -39,17 +39,16 @@
             - month = @card_information.exp_month.to_s
             - year = @card_information.exp_year.to_s[ 2 ... 4 ]
             %p= "有効期限 #{month + "/" + year}"
-            %p#brand= image_tag("/images/material/logo/#{@card_src}")
+            %p#brand= image_tag("/images/#{@card_src}")
         
         .destination
           .destination__header
             .destination__header__title 配送先
-            - if @destination.present?
-              .destination__header__ChangingDestination
-                = link_to "変更する", "/"
+            .destination__header__ChangingDestination
+            = link_to "変更する", ""
           .destination__detail
             %p= "〒#{@destination.post_code}"
-            %p= @product.prefecture.name
+            %p= Prefecture.find(@destination.prefecture_id).name
             %p= @destination.address
             %p= @destination.buidling_name if @destination.building_name.present?
             %p= "#{@destination.family_name} #{@destination.first_name}"

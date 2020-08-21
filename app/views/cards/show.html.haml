@@ -2,6 +2,6 @@
 
 = "************" + @card_information.last4
 = @card_information.exp_month.to_s + "/" + @card_information.exp_year.to_s[ 2 ... 4 ]
-= image_tag("/assets/material/logo/#{@card_src}")
+= image_tag("/images/#{@card_src}")
 
 = link_to "削除する", card_path, method: :delete
