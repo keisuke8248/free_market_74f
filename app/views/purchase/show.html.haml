@@ -49,8 +49,9 @@
           .destination__detail
             %p= "〒#{@destination.post_code}"
             %p= Prefecture.find(@destination.prefecture_id).name
+            %p= @destination.city
             %p= @destination.address
-            %p= @destination.buidling_name if @destination.building_name.present?
+            %p= @destination.building_name if @destination.building_name.present?
             %p= "#{@destination.family_name} #{@destination.first_name}"
         
         .submit
