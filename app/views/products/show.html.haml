@@ -10,8 +10,10 @@
             %li
               = image_tag @product.images.first.image.to_s, class: "itemBox__image--large"
               %ul.itemBox__image--small
+                - num = 0
                 - @product.images.each do |image|
-                  %li= image_tag image.image.to_s
+                  %li= image_tag image.image.to_s, id: num, class:"imageSelection"
+                  - num += 1
         .itemBox__price
           %span= "¥" + @product.price.to_i.to_s(:delimited)
           .itemBox__price__detail
