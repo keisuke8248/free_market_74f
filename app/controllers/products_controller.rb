@@ -43,9 +43,7 @@ class ProductsController < ApplicationController
   def destroy
     render :layout => nil
     @product = Product.find(params[:id])
-    if @product.seller_id == current_user.id
-      @product.destroy
-    else
+    unless @product.seller_id == current_user.id && @product.destroy
       redirect_to product_path(@product.id)
     end
   end
