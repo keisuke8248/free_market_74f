@@ -30,6 +30,7 @@ class User < ApplicationRecord
     message: "全角で入力して下さい"
   }
   validates :birth_day, presence: true
+  has_many :comments, dependent: :destroy
 
   def self.from_omniauth(auth)
     sns = SnsCredential.where(provider: auth.provider, uid: auth.uid).first_or_create

@@ -118,3 +118,16 @@
 
 ### Association
 - has_many :products
+
+
+## commentsテーブル
+
+|Column|Type|Options|
+|------|----|-------|
+|product_id|integer|null: false, foreign_key: true|
+|user_id|integer|null: false, foreign_key: true|
+|delete_check|integer|default: 0|
+|comment|string||
+
+### Association
+- has_many :products
