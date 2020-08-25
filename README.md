@@ -23,6 +23,7 @@
 - has_many :seller_records, class_name: 'Product', dependent: :destroy
 - has_one :destination dependent: :destroy
 - has_one :card dependent: :destroy
+- has_many :comments dependent: :destroy
 
 
 ## destinationsテーブル
@@ -97,6 +98,7 @@
 - has_many :images dependent: :destroy
 - accepts_nested_attributes_for :images,  allow_destroy: true
 - belongs_to_active_hash :prefecture
+- has_many :comments dependent: :destroy
 
 ## imagesテーブル
 
