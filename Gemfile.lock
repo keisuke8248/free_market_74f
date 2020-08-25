@@ -107,10 +107,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-
-    diff-lcs (1.4.4)
     devise-i18n (1.9.1)
       devise (>= 4.7.1)
+    diff-lcs (1.4.4)
     erubi (1.9.0)
     erubis (2.7.0)
     excon (0.74.0)
@@ -354,10 +353,10 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.2)
   devise
+  devise-i18n
   factory_bot_rails
   fog-aws
   font-awesome-sass
-  devise-i18n
   haml-rails
   jbuilder (~> 2.5)
   jquery-rails
@@ -368,8 +367,8 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 5.2.3)
   rails-controller-testing
-  rspec-rails
   rails-i18n (~> 5.1)
+  rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver
   spring
