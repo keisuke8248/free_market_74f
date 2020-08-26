@@ -16,8 +16,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    @product.images.present? 
-    if @product.save
+    if @product.images.present?  && @product.save
       redirect_to root_path    
     else
       redirect_to  new_product_path
