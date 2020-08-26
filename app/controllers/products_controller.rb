@@ -48,6 +48,12 @@ class ProductsController < ApplicationController
     end
   end
 
+  def search
+    @products = Product.search(params[:keyword])
+    @search_name = params[:keyword]
+    render :layout => nil
+  end
+
   private
   def product_params
     params.require(:product).permit(:id, :buyer_id, :name, :category_id, :brand, :status, :cost, :size, :judgment, :prefecture_id, :days, :price, :description, :seller_id, images_attributes: [:image]).merge(seller_id: current_user.id)

@@ -1,11 +1,14 @@
+= stylesheet_link_tag "_top-page", :media => "all"
+= stylesheet_link_tag "_search-list", :media => "all"
 .header
   .header__up
     .header__title
       = link_to image_tag("/images/material/logo/logo.png", class: "header__title--text"), root_path
     = form_with(url: search_products_path, local: true, method: :get, class: "header__search--form") do |f|
-      = f.text_field :keyword, placeholder: "キーワードから探す", class: "header__search"
-      = button_tag type: :submit, class: "header__search--tag" do
-        = image_tag("/images/material/icon/icon-search 1.png", class: "header__search--btn")
+      = f.text_field :keyword, value: "#{@search_name}", class: "header__search"
+      .header__search__info
+        = button_tag type: :submit, class: "header__search--tag" do
+          = image_tag("/images/material/icon/icon-search 1.png", class: "header__search--btn")
   .header__menu
     .header__menu--left
       .header__menu--category
@@ -32,3 +35,25 @@
       - else
         = link_to "ログイン", new_user_session_path, class: "header__menu--btn", id: "right-btn"
         = link_to "新規会員登録", new_user_registration_path, class: "header__menu--btn"
+.wrapper
+  .main
+    %span.search-text
+      ="#{@search_name}"
+    の検索結果
+    .product__all
+      - @products.each do |product|
+        %ul.product__list
+          %li.product__content
+            = link_to "/products/#{product.id}" do
+              = image_tag product.images.first.image.to_s, { class: 'product__image'}
+              .product__info
+                .product__info--name
+                  = "#{product.name}"
+                .product__info--price
+                  = "¥#{product.price}(税込)"
+                  = "#{product.judgment}"
+
+= link_to new_product_path do
+  .purchaseBtn
+    %span.purchaseBtn__text 出品する
+    %img.purchaseBtn__icon{:src => "/images/material/icon/icon_camera.png"}/

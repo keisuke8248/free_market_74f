@@ -22,6 +22,13 @@ li {
     height: 36px;
     padding: 0 0 0 5px;
     font-size: 16px;
+    &--form {
+      display: flex;
+    }
+    &--tag {
+      border: 0;
+      margin-bottom: 10px;
+    }
     &--btn {
     width: 36px;
     border: 0;
