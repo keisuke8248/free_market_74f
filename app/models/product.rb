@@ -6,6 +6,7 @@ class Product < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
   has_many :images, dependent: :destroy
+  has_many :comments, dependent: :destroy
   accepts_nested_attributes_for :images, allow_destroy: true
   validate :images_sheets
   validates :seller_id, :name, :description, :status, :category_id, :prefecture_id, :cost, :days, :price, presence: true
@@ -28,5 +29,5 @@ def text_placeholder
    (色、素材、重さ、定価、注意点など)
 
    例) 2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。合わせやすいのでおすすめです。
-  EOS
+  EOS 
 end
