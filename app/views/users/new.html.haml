@@ -1,2 +1,3 @@
-%h1 Users#new
-%p Find me in app/views/users/new.html.erb
+= button_to "メールアドレスで登録する", new_user_registration_path, method: :get
+= button_to 'Googleで登録する', user_google_oauth2_omniauth_authorize_path, method: :post
+= button_to 'Facebookで登録する', user_facebook_omniauth_authorize_path, method: :post

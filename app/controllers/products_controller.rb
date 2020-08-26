@@ -2,25 +2,37 @@ class ProductsController < ApplicationController
   def index
     @category_parent = Category.where(ancestry: nil)
     @products = Product.all.order(id: "DESC")
+    render :layout => nil
   end
 
   def show
     @product = Product.find(params[:id])
+    @comment = Comment.new
+    @commentALL = @product.comments
   end
 
   def new
     @product = Product.new
     @product.images.new
-    @category_parent = Category.roots
+    @category_parent_array = ["---"]
+    @category_parent_array = Category.where(ancestry: nil)
   end
 
   def create
     @product = Product.new(product_params)
-    if @product.images.present?  && @product.save
-      redirect_to root_path    
+    if @product.images.present? && @product.save
+      redirect_to root_path
     else
       redirect_to  new_product_path
     end
+  end
+
+  def get_category_children
+    @category_children = Category.find(params[:parent_id]).children
+  end
+
+  def get_category_grandchildren
+    @category_grandchildren = Category.find(params[:child_id]).children
   end
 
 
@@ -31,6 +43,11 @@ class ProductsController < ApplicationController
   end
 
   def destroy
+    render :layout => nil
+    @product = Product.find(params[:id])
+    unless @product.seller_id == current_user.id && @product.destroy
+      redirect_to product_path(@product.id)
+    end
   end
 
   private

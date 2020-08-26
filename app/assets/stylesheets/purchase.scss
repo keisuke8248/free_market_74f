@@ -1,3 +1,152 @@
-// Place all the styles related to the purchase controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@mixin box{
+  border-top: 1px solid rgb(245, 245, 245);
+  padding: 24px 16px;
+}
+
+img {
+  display: table-cell;
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  text-align: center;
+}
+
+#brand{
+  max-height: 32px;
+  max-width: 48px;
+  margin-top: 12px;
+}
+
+p {
+  margin: 0;
+  line-height: 1.4em;
+  font-size: 14px;
+}
+
+a {
+  text-decoration: none;
+  color: #3CCACE;
+}
+
+a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+
+.main {
+  width: 100vw;
+  background-color: #f8f8f8;
+}
+
+.showMain {
+  background-color: #f8f8f8;
+  padding: 40px;
+  margin: auto
+}
+
+.mainContent {
+  margin: 0 auto;
+  width: 700px;
+}
+
+.itemBox {
+  background-color: #fff;
+  width: 375px;
+  padding: 24px 40px 40px;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.product {
+  @include box;
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    &__image {
+      height: 80px;
+      width: 80px;
+      display: table;
+    }
+    &__info {
+      width: 100%;
+      margin-left: 16px;
+      &__name {
+        text-align: left;
+        font-size: 14px;
+        margin-bottom: 8px;
+      }
+      &__content {
+        text-align: right;
+        &__paymentMethod {
+          font-size: 12px;
+        }
+        &__price {
+          font-size: 15px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+.price {
+  @include box;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  &__detail {
+    font-size :24px;
+  }
+}
+
+.card {
+  @include box;
+  &__header {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    &__title {
+      font-weight: bold;
+    }
+  }
+}
+
+.destination {
+  @include box;
+  &__header {
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    &__title {
+      font-weight: bold;
+    }
+  }
+}
+
+.submit {
+  @include box;
+  width: 100%;
+  &__btn {
+    font-weight: 600;
+    font-size: 17px;
+    width: 100%;
+    height: 48px;
+    background-color: #3CCACE;
+    border-style: none;
+    border-radius: 4px;
+    color: #fff;
+  }
+  &__btn:hover {
+    background-color: #299296;
+  }
+}
