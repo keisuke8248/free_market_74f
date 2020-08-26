@@ -9,7 +9,8 @@
   .header__menu
     .header__menu--left
       .header__menu--category
-        = link_to "カテゴリー", "#", class: "header__menu--btn", id: "category-tag"
+        = link_to "カテゴリー", "#", class: "header__menu--btn"
+        = link_to image_tag("/images/material/icon/icon_category.png", class: "header__menu--btn__icon")
         %ul.category__parent.category__list
           - @parents.each do |parent|
             %li
@@ -24,8 +25,10 @@
                       - child.children.each do |grandchild|
                         %li
                           = link_to "#", class: " category__child--name" do
-                            = grandchild.name 
-      = link_to "ブランド", "#", class: "header__menu--btn", id: "brand-tag"
+                            = grandchild.name
+      .header__menu--brand
+        = link_to "ブランド", "#", class: "header__menu--btn"
+        = link_to image_tag("/images/material/icon/icon_brand.png", class: "header__menu--btn__icon")
     .header__menu--right
       - if user_signed_in?
         = link_to "マイページ", users_path, class: "header__menu--btn"
