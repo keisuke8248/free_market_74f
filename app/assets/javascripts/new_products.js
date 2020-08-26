@@ -1,34 +1,65 @@
-window.addEventListener('DOMContentLoaded', function(){
-  
+window.addEventListener('DOMContentLoaded',function(){
+
   var dataBox = new DataTransfer();
 
   var file_field = document.querySelector('input[type=file]')
-  //fileが選択された時に発火するイベント
+
   $('#img-file').change(function(){
-    //選択したfileのオブジェクトをpropで取得
-    var file = $('input[type="file"]').prop('files')[0];
-    $.each(this.files, function(i, file){
-    //FileReaderのreadAsDataURLで指定したFileオブジェクトを読み込む
+    
+   var files = $('input[type="file"]').prop('files')[0];
+   $.each(this.files, function(i, file){
+    
     var fileReader = new FileReader();
-    //読み込みが完了すると、srcにfileのURLを格納
+    
     dataBox.items.add(file)
-    
+
     file_field.files = dataBox.files
-    
-    var num = $('.item-image').length + 1 + i
+
+    var num = $('.product-image').length + 1 + i
     fileReader.readAsDataURL(file);
+
+    if (num == 10){
+      $('#image-input').css('display', 'none')
+    }
+
     fileReader.onloadend = function() {
       var src = fileReader.result
-      var html=  `<div class='item-image' data-image="${file.name}">
-                    <div class=' item-image__content'>
-                      <div class='item-image__content--icon'>
-                        <img src=${src} width="114" height="80" >
-                      </div>
+      var html=`<div class='product-image' data-image="${file.name}">
+                  <div class='product-image__content'>
+                    <div class='product-image__content--icon'>
+                      <img src=${src}>
                     </div>
-                  </div>`
-      //image_box__container要素の前にhtmlを差し込む
-      $('#image-box__container').before(html);
+                  </div>
+                  <div class='product-image__operation'>
+                    <div class='product-image__operation--delete'>削除</div>
+                  </div>
+                </div>`
+      $('#image-input').before(html);
     };
+    $('#image-input').attr('class', `product-num-${num}`)
     });
   });
+  $(document).on("click", '.product-image__operation--delete', function(){
+    var target_image = $(this).parent().parent()
+
+    var target_name = $(target_image).data('image')
+
+    if(file_field.files.length==1){
+
+      $('input[type=file]').val(null)
+      dataBox.clearData();
+      console.log(dataBox)
+    }else{
+      $.each(file_field.files, function(i,input){
+        if(input.name==target_name){
+          dataBox.items.remove(i) 
+        }
+      })
+      file_field.files = dataBox.files
+    }
+    target_image.remove();
+    var num = $('.product-image').length
+  $('#image-input').show()
+  $('#image-input').attr('class', `product-num-${num}`)
+  })
 });
