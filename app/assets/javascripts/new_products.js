@@ -48,7 +48,6 @@ window.addEventListener('DOMContentLoaded',function(){
 
       $('input[type=file]').val(null)
       dataBox.clearData();
-      console.log(dataBox)
     }else{
       $.each(file_field.files, function(i,input){
         if(input.name==target_name){
