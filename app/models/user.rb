@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_one :destination, dependent: :destroy
   has_many :buyer_records,   class_name: 'Product', foreign_key: 'buyer_id', dependent: :destroy
   has_many :seller_records,   class_name: 'Product', foreign_key: 'seller_id', dependent: :destroy
+  has_many :favorites
+  has_many :products, through: :favorites
 
   validates :nickname, presence: true
   validates :email, presence: true

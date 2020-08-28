@@ -11,13 +11,18 @@ Rails.application.routes.draw do
     end
     resources :purchase, only: [:show, :create] do
       member do
-        post 'pay'
-        get 'done'
-        get 'fail'
-        get 'card'
         post 'create'
+        delete 'destroy'
       end
     end
+    resources :favorite do
+      
+      member do
+        post 'create'
+        delete 'destroy'
+      end
+    end
+
   end
   devise_for :users, controllers: {
     sessions:      'users/sessions',
