@@ -8,36 +8,36 @@ $(document).on('turbolinks:load', function(){
     // 子カテゴリーの表示作成
     function appendChidrenBox(insertHTML){
       var childSelectHtml = '';
-      childSelectHtml = `<div class='category-area__choose-space--added' id= 'children_wrapper'>
-                          <div class='category-area__choose-space--children'>
-                            <select class="category-area__choose-space--selectbox" id="child_category" name="product[category_id]">
-                              <option value="---" data-category="---">---</option>
+      childSelectHtml = `<div class='sell-collection_category__label--added' id= 'children_wrapper'>
+                          <div class='sell-collection_category__label--children'>
+                            <select class="sell-collection_category__label--selectbox" id="child_category" name="product[category_id]">
+                              <option value="---" data-category="---">選択してください</option>
                               ${insertHTML}
                             <select>
                           </div>
                         </div>`;
-      $('.category-area__choose-space').append(childSelectHtml);
+      $('.sell-collection_category__label').append(childSelectHtml);
     }
 
     // 孫カテゴリーの表示作成
     function appendGrandchidrenBox(insertHTML){
       var grandchildSelectHtml = '';
-      grandchildSelectHtml = `<div class='category-area__choose-space--added' id= 'grandchildren_wrapper'>
-                                <div class='category-area__choose-space--grandchildren'>
-                                  <select class="category-area__choose-space--selectbox" id="grandchild_category" name="product[category_id]">
-                                    <option value="---" data-category="---">---</option>
+      grandchildSelectHtml = `<div class='sell-collection_category__label--added' id= 'grandchildren_wrapper'>
+                                <div class='sell-collection_category__label--grandchildren'>
+                                  <select class="sell-collection_category__label--selectbox" id="grandchild_category" name="product[category_id]">
+                                    <option value="---" data-category="---">選択してください</option>
                                     ${insertHTML}
                                   </select>
                                 </div>
                               </div>`;
-      $('.category-area__choose-space').append(grandchildSelectHtml);
+      $('.sell-collection_category__label').append(grandchildSelectHtml);
     }
 
     // 親カテゴリー選択後のイベント
-    $('#parent_category').on('change', function(){
+    $('#category_select').on('change', function(){
       var parent_category_id = document.getElementById
-      ('parent_category').value; //選択された親カテゴリーの名前を取得
-      if (parent_category_id != "---"){ //親カテゴリーが初期値でないことを確認
+      ('category_select').value; //選択された親カテゴリーの名前を取得
+      if (parent_category_id != "選択してください"){ //親カテゴリーが初期値でないことを確認
         $.ajax({
           url: '/products/category/get_category_children',
           type: 'GET',
@@ -63,9 +63,9 @@ $(document).on('turbolinks:load', function(){
     });
 
     // 子カテゴリー選択後のイベント
-    $('.category-area').on('change', '#child_category', function(){
+    $('.sell-collection_category').on('change', '#child_category', function(){
       var child_category_id = $('#child_category option:selected').data('category'); //選択された子カテゴリーのidを取得
-      if (child_category_id != "---"){ //子カテゴリーが初期値でないことを確認
+      if (child_category_id != "選択してください"){ //子カテゴリーが初期値でないことを確認
         $.ajax({
           url: '/products/category/get_category_grandchildren',
           type: 'GET',
