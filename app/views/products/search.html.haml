@@ -31,6 +31,7 @@
                             = grandchild.name
       .header__menu--brand
         = link_to "ブランド", "#", class: "header__menu--btn"
+      .header__menu--brand-tag
         = link_to image_tag("/images/material/icon/icon_brand.png", class: "header__menu--btn__icon")
     .header__menu--right
       - if user_signed_in?
@@ -40,9 +41,13 @@
         = link_to "新規会員登録", new_user_registration_path, class: "header__menu--btn"
 .wrapper
   .main
-    %span.search-text
-      ="#{@search_name}"
-    の検索結果
+    - if @search_name == ""
+      .search-text
+        = "検索結果"
+    - else
+      %span.search-text
+        ="#{@search_name}"
+      の検索結果
     .product__all
       - @products.each do |product|
         %ul.product__list
