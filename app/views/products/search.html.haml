@@ -52,7 +52,7 @@
       - @products.each do |product|
         %ul.product__list
           %li.product__content
-            = link_to "/products/#{product.id}" do
+            = link_to product_path(product.id) do
               = image_tag product.images.first.image.to_s, { class: 'product__image'}
               .product__info
                 .product__info--name
@@ -64,4 +64,4 @@
 = link_to new_product_path do
   .purchaseBtn
     %span.purchaseBtn__text 出品する
-    %img.purchaseBtn__icon{:src => "/images/material/icon/icon_camera.png"}/
+    = image_tag("/images/material/icon/icon_camera.png", class: "purchaseBtn__icon")
