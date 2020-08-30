@@ -12,6 +12,14 @@ class Product < ApplicationRecord
   validates :seller_id, :name, :description, :status, :category_id, :prefecture_id, :cost, :days, :price, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
 
+  def self.search(search)
+    if search
+      Product.where('name LIKE(?)', "%#{search}%")
+    else
+      Product.all
+    end
+  end
+  
   def images_sheets
     if images.present?
       if images.length > 10

@@ -22,6 +22,13 @@ li {
     height: 36px;
     padding: 0 0 0 5px;
     font-size: 16px;
+    &--form {
+      display: flex;
+    }
+    &--tag {
+      border: 0;
+      margin-bottom: 10px;
+    }
     &--btn {
     width: 36px;
     border: 0;
@@ -84,9 +91,17 @@ li {
         }
       }
     }
+    &--brand {
+      margin-top: 3px;
+    }
     &--btn {
       color: #333;
       font-size: 14px;
+      &__icon {
+        width: 18px;
+        height: 15px;
+        margin: 3px 10px 0 5px;
+      }
     }
   }
 }
@@ -111,10 +126,6 @@ li {
   padding: 3px 15px;
   font-size: 13px;
   letter-spacing: 2px;
-}
-
-#category-tag {
-  padding-right: 46px;
 }
 
 #right-btn {
