@@ -46,7 +46,7 @@
         = "検索結果"
     - else
       %span.search-text
-        ="#{@search_name}"
+        = @search_name
       の検索結果
     .product__all
       - @products.each do |product|
