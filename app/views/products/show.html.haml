@@ -85,6 +85,10 @@
           = link_to "削除", product_path(@product.id), method: "DELETE", class: "itemBox__btn"
 
         - if !Favorite.exists?(user_id:current_user.id, product_id:@product.id)
+          product番号
+          = @product.id
+          favorite番号
+          = @favorite.id
           = link_to "いいね", product_favorite_path(@product.id), method: :post, class: "itemBox__btn"
         - else
-          = link_to "いいね解除", product_favorite_path(@product.id), method: :delete, class: "itemBox__btn"
+          = link_to "いいね解除", product_favorite_path(@favorite.id), method: :delete, class: "itemBox__btn"
