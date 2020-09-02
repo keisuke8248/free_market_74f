@@ -16,12 +16,11 @@ Rails.application.routes.draw do
       end
     end
     resources :favorites, only: [:show, :create, :destroy] do
-      member do
-        post 'create'
-        delete 'destroy'
-      end
+      # member do
+      #   post 'create'
+      #   delete 'destroy'
+      # end
     end
-
   end
   devise_for :users, controllers: {
     sessions:      'users/sessions',
