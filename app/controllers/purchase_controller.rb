@@ -1,10 +1,10 @@
 class PurchaseController < ApplicationController
+  before_action :find_product, except: :create
 
   require 'payjp'
 
   def show
     @destination = current_user.destination
-    @product = Product.find(params[:id])
     card = Card.find_by(user_id: current_user.id)
     if @product.buyer_id.present?
       redirect_to controller: :products, action: :show
@@ -79,6 +79,12 @@ class PurchaseController < ApplicationController
         redirect_to action: :card
       end
     end
+  end
+
+  private
+
+  def find_product
+    @product = Product.find(params[:id])
   end
 
 end
