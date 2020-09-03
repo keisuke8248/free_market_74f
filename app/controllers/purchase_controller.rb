@@ -56,9 +56,11 @@ class PurchaseController < ApplicationController
   end
 
   def done
+    render :layout => nil
   end
 
   def fail
+    render :layout => nil
   end
 
   def card
