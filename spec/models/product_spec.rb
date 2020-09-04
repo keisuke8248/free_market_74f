@@ -55,4 +55,9 @@ describe Product do
       expect(product.errors[:price]).to include("can't be blank")
     end
   end
+  describe '#search' do
+    it "入力したキーワードであいまい検索ができること" do
+      search = Product.where('name LIKE(?)', "%#{search}%")
+    end
+  end
 end
