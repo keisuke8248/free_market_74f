@@ -57,3 +57,4 @@
         .submit
           = form_tag(action: :pay, method: :post) do
             = submit_tag '購入する', class: :submit__btn
+      = render partial: "breadCrumbs"

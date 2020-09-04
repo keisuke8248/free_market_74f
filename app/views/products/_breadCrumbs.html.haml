@@ -1,0 +1,13 @@
+.breadCrumbs
+  %ul
+    %li
+      = link_to "フリマ", "/"
+    - if @product.category.parent.parent.present?
+      %li
+        = link_to @product.category.parent.parent.name, "#"
+    %li
+      = link_to @product.category.parent.name, "#"
+    %li
+      = link_to @product.category.name, "#"
+    %li
+      = @product.name
