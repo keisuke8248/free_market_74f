@@ -15,12 +15,13 @@ Rails.application.routes.draw do
         delete 'destroy'
       end
     end
-    resources :favorites, only: [:show, :create, :destroy] do
+    resources :favorites, only: [:show, :create,:destroy] do
       # member do
-      #   post 'create'
+      # #   post 'create'
       #   delete 'destroy'
       # end
     end
+
   end
   devise_for :users, controllers: {
     sessions:      'users/sessions',
