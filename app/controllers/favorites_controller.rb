@@ -1,4 +1,5 @@
 class FavoritesController < ApplicationController
+
   def create
     @user_id = current_user.id
     @product_id = Product.find(params[:product_id]).id
@@ -21,4 +22,5 @@ class FavoritesController < ApplicationController
       redirect_to product_path(params[:id])
     end
   end
+  
 end

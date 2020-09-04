@@ -15,11 +15,7 @@ Rails.application.routes.draw do
         delete 'destroy'
       end
     end
-    resources :favorites, only: [:show, :create,:destroy] do
-      # member do
-      # #   post 'create'
-      #   delete 'destroy'
-      # end
+    resources :favorites, only: [:show, :create, :destroy] do
     end
 
   end
