@@ -1,26 +1,13 @@
-//= stylesheet_link_tag "_top-page", :media => "all"
-= stylesheet_link_tag "users", :media => "all"
-= stylesheet_link_tag "cards", :media => "all"
-//= render 'products/header'
-- month = @card_information.exp_month.to_s
-- year = @card_information.exp_year.to_s[ 2 ... 4 ]
-.container
-  .content
-    .card
-      .card__header
-        支払い方法
-      .card__content#show
-        .card__left
-          .card__left__header
-            クレジットカード
-          .card__left__main
-            %ul.card__left__main__detail
-              %li= "************" + @card_information.last4
-              %li= "有効期限 " + month + "/" + year
-              %li= image_tag("/images/#{@card_src}")
-        .card__right
-          = link_to "更新する", card_path, method: :delete
-      .card__info
-        ※登録できるカードは一枚のみです
-  = render 'users/nav'
-= render 'layouts/footer'
+クレジットカード一覧
+
+= "************" + @card_information.last4
+= @card_information.exp_month.to_s + "/" + @card_information.exp_year.to_s[ 2 ... 4 ]
+= image_tag("/images/#{@card_src}")
+
+= link_to "削除する", card_path, method: :delete
+
+.breadCrumbs
+  %ul
+    %li= link_to "トップページ", "/"
+    %li= link_to "マイページ", users_path(current_user.id)
+    %li 支払い方法
