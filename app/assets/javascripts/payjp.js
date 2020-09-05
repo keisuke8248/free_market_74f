@@ -23,11 +23,11 @@ document.addEventListener(
             document.inputForm.submit();
           } else {
             $("#alert").empty();
-            $("card_number").val("");
-            $("cvc").val("");
-            $("exp_month").val("");
-            $("exp_year").val("");
-            $("#alert").append("カード情報が正しくありません")
+            $("#card_number").val("");
+            $("#cvc").val("");
+            $("#exp_month").val("");
+            $("#exp_year").val("");
+            $("#alert").append("カード情報が正しくありません");
           }
         });
       });
