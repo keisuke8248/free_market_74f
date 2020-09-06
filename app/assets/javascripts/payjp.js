@@ -23,10 +23,6 @@ document.addEventListener(
             document.inputForm.submit();
           } else {
             $("#alert").empty();
-            $("#card_number").val("");
-            $("#cvc").val("");
-            $("#exp_month").val("");
-            $("#exp_year").val("");
             $(".blank__alert").empty();
             console.log(card)
 
@@ -45,6 +41,10 @@ document.addEventListener(
                 (card['exp_month']) != "" &&
                 (card['exp_year']) != "" &&
                 (card['cvc']) != "") {
+                  $("#card_number").val("");
+                  $("#cvc").val("");
+                  $("#exp_month").val("");
+                  $("#exp_year").val("");
                   $("#alert").append("カード情報が正しくありません");
                 }
           }
