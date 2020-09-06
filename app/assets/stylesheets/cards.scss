@@ -135,4 +135,8 @@ $changed-color: #299296;
     height: 18px;
     color: red;
   }
+  .blank__alert {
+    color: $main-color;
+    font-weight: bold;
+  }
 }
