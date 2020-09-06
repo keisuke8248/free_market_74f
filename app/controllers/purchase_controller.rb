@@ -5,17 +5,14 @@ class PurchaseController < ApplicationController
 
   def show
     @destination = current_user.destination
-    card = Card.find_by(user_id: current_user.id)
+    @card = Card.find_by(user_id: current_user.id)
     if @product.buyer_id.present?
       redirect_to controller: :products, action: :show
-    elsif card.blank?
-      redirect_to controller: :cards, action: :new
-    elsif @destination.blank?
-      redirect_to ('/destinations/sign_up/'), id: current_user.id
-    else
+
+    elsif @card.present?
       Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
-      customer = Payjp::Customer.retrieve(card.customer_id)
-      @card_information = customer.cards.retrieve(card.card_id)
+      customer = Payjp::Customer.retrieve(@card.customer_id)
+      @card_information = customer.cards.retrieve(@card.card_id)
       card_brand = @card_information.brand
       case card_brand 
       when "Visa"
