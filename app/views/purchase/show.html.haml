@@ -32,14 +32,17 @@
             .card__header__title
               支払い方法
             .card__header__ChangingCard
-              = link_to "変更する", card_product_purchase_path
-          .card__detail
-            %p クレジットカード
-            %p= "************" + @card_information.last4
-            - month = @card_information.exp_month.to_s
-            - year = @card_information.exp_year.to_s[ 2 ... 4 ]
-            %p= "有効期限 #{month + "/" + year}"
-            %p#brand= image_tag("/images/#{@card_src}")
+              = link_to "変更する", card_product_purchase_path if @card.present?
+          - if @card.present?
+            .card__detail
+              %p クレジットカード
+              %p= "************" + @card_information.last4
+              - month = @card_information.exp_month.to_s
+              - year = @card_information.exp_year.to_s[ 2 ... 4 ]
+              %p= "有効期限 #{month + "/" + year}"
+              %p#brand= image_tag("/images/#{@card_src}")
+          - else
+            = link_to "登録してください", cards_path, class: :card__register
         
         .destination
           .destination__header
