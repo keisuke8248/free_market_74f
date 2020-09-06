@@ -55,6 +55,6 @@
             %p= "#{@destination.family_name} #{@destination.first_name}"
         
         .submit
-          = form_tag(action: :pay, method: :post) do
-            = submit_tag '購入する', class: :submit__btn
+          = form_with url: pay_product_purchase_path do |f|
+            = f.submit '購入する', class: :submit__btn
       = render partial: "breadCrumbs"
