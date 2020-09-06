@@ -32,6 +32,7 @@ class PurchaseController < ApplicationController
   end
 
   def pay
+    card = Card.find_by(user_id: current_user.id)
     product = Product.find(params[:id])
     seller_id = product.seller_id
     buyer_id = product.buyer_id
@@ -39,8 +40,9 @@ class PurchaseController < ApplicationController
       redirect_to action: :fail
     elsif seller_id == current_user.id
       redirect_to root_path
+    elsif card.blank? || @destination = current_user.destination.blank?
+      redirect_to action: :show
     else
-      card = Card.find_by(user_id: current_user.id)
       Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
       Payjp::Charge.create(
       amount: product.price,
