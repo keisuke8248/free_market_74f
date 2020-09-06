@@ -43,10 +43,4 @@
         #alert
         .card__content__block
           = f.submit "更新する", id: :token_submit
-
-      .breadCrumbs
-        %ul
-          %li= link_to "トップページ", "/"
-          %li= link_to "マイページ", users_path(current_user.id)
-          %li= link_to "支払い方法", cards_path(current_user.id)
-          %li カード登録
+      = render partial: 'breadCrumbs'
