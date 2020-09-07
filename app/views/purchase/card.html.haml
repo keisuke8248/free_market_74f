@@ -1,19 +1,46 @@
+= stylesheet_link_tag "users", :media => "all"
+= stylesheet_link_tag "cards", :media => "all"
+
 - year_selection = [["--", nil],["01", 1],["02", 2],["03", 3],["04", 4],["05", 5],["06", 6],["07", 7],["08", 8],["09", 9],["10", 10],["11", 11],["12", 12]]
 - month_selection = [["--", nil],["20", 2020],["21", 2021],["22", 2022],["23", 2023],["24", 2024],["25", 2025],["26", 2026],["27", 2027],["28", 2028],["29", 2029]]
 
-= form_with url: product_purchase_path, method: :post, id: 'charge-form', html:{name: "inputForm"} do |f|
-  %label カード番号
-  = f.text_field :number, class: :number, placeholder: "半角数字のみ" ,maxlength: "16", type: :text, id: :card_number
-  %br
-  %label 有効期限
-  = f.select :exp_month, year_selection, type: :text, id: :exp_month
-  %span 月/
-  = f.select :exp_year, month_selection, type: :text, id: :exp_year
-  %span 年
-  %br
-  %label セキュリティコード
-  = f.text_field :cvc, class: :cvc, placeholder: "カード背面3~4桁の番号", maxlength: "4", id: :cvc
-  #card_token
-  #alert{style: "color:red"}
-  = f.submit "追加する", id: :token_submit
-= render partial: "breadCrumbs"
+.container
+  .content
+    .card
+      .card__header
+        クレジットカード情報入力
+      = form_with url: product_purchase_path, method: :post, class: "card__content", id: 'charge-form', html:{name: "inputForm"} do |f|
+        .card__content__block
+          .card__content__block__title
+            %span カード番号
+            %span#require 必須
+          .blank__alert#number
+          = f.text_field :number, class: :number, placeholder: "半角数字のみ" ,maxlength: "16", type: :text, id: :card_number
+          .card__content__block__logo
+            = image_tag("/images/visa.gif")
+            = image_tag("/images/master-card.png")
+            = image_tag("/images/jcb.gif")
+            = image_tag("/images/american-express.gif")
+            = image_tag("/images/diners-club.gif")
+            = image_tag("/images/discover.jpg")
+        .card__content__block
+          .card__content__block__title
+            %span 有効期限
+            %span#require 必須
+          .blank__alert#date
+          .card__content__block__selection
+            = f.select :exp_month, year_selection, type: :text, id: :exp_month
+            %span 月
+            = f.select :exp_year, month_selection, type: :text, id: :exp_year
+            %span 年
+        .card__content__block
+          .card__content__block__title
+            %span セキュリティコード
+            %span#require 必須
+          .blank__alert#cvc_number
+          = f.text_field :cvc, class: :cvc, placeholder: "カード背面4桁もしくは3桁の番号", maxlength: "4", id: :cvc
+        #card_token
+        #alert
+        .card__content__block
+          = f.submit "変更する", id: :token_submit
+      = render partial: 'breadCrumbs'

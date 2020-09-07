@@ -32,29 +32,35 @@
             .card__header__title
               支払い方法
             .card__header__ChangingCard
-              = link_to "変更する", card_product_purchase_path
-          .card__detail
-            %p クレジットカード
-            %p= "************" + @card_information.last4
-            - month = @card_information.exp_month.to_s
-            - year = @card_information.exp_year.to_s[ 2 ... 4 ]
-            %p= "有効期限 #{month + "/" + year}"
-            %p#brand= image_tag("/images/#{@card_src}")
+              = link_to "変更する", card_product_purchase_path if @card.present?
+          - if @card.present?
+            .card__detail
+              %p クレジットカード
+              %p= "************" + @card_information.last4
+              - month = @card_information.exp_month.to_s
+              - year = @card_information.exp_year.to_s[ 2 ... 4 ]
+              %p= "有効期限 #{month + "/" + year}"
+              %p#brand= image_tag("/images/#{@card_src}")
+          - else
+            = link_to "登録してください", cards_path, class: :card__register
         
         .destination
           .destination__header
             .destination__header__title 配送先
             .destination__header__ChangingDestination
-            = link_to "変更する", ""
-          .destination__detail
-            %p= "〒#{@destination.post_code}"
-            %p= Prefecture.find(@destination.prefecture_id).name
-            %p= @destination.city
-            %p= @destination.address
-            %p= @destination.building_name if @destination.building_name.present?
-            %p= "#{@destination.family_name} #{@destination.first_name}"
+            = link_to "変更する", "" if @destination.present?
+          - if @destination.present?
+            .destination__detail
+              %p= "〒#{@destination.post_code}"
+              %p= Prefecture.find(@destination.prefecture_id).name
+              %p= @destination.city
+              %p= @destination.address
+              %p= @destination.building_name if @destination.building_name.present?
+              %p= "#{@destination.family_name} #{@destination.first_name}"
+          - else
+            = link_to "登録してください", new_destination_registration_path, class: :destination__register
         
         .submit
-          = form_tag(action: :pay, method: :post) do
-            = submit_tag '購入する', class: :submit__btn
+          = form_with url: pay_product_purchase_path do |f|
+            = f.submit '購入する', class: :submit__btn
       = render partial: "breadCrumbs"
