@@ -24,7 +24,6 @@ document.addEventListener(
           } else {
             $("#alert").empty();
             $(".blank__alert").empty();
-            console.log(card)
 
             let message = "必須項目です"
 
