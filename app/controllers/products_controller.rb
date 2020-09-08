@@ -8,6 +8,8 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find(params[:id])
     @favorite = Favorite.new
+    @comment = Comment.new
+    @commentALL = @product.comments
   end
 
   def new
@@ -42,12 +44,17 @@ class ProductsController < ApplicationController
   end
 
   def destroy
+    render :layout => nil
     @product = Product.find(params[:id])
-    if @product.seller_id == current_user.id && @product.destroy
-      redirect_to root_path
-    else
-      redirect_to product_path(product.id)
+    unless @product.seller_id == current_user.id && @product.destroy
+      redirect_to product_path(@product.id)
     end
+  end
+
+  def search
+    @products = Product.search(params[:keyword])
+    @search_name = params[:keyword]
+    render :layout => nil
   end
 
   private

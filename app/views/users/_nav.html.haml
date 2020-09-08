@@ -1,0 +1,104 @@
+.nav
+  %ul
+    %li
+      = link_to "", class: "active" do
+        マイページ
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        お知らせ
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        やることリスト
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        いいね！一覧
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        出品する
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        下書き一覧
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        出品した商品 - 出品中
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        出品した商品 - 取引中
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        出品した商品 - 売却済み
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        購入した商品 - 取引中
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        購入した商品 - 過去の取引
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        ニュース一覧
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        評価一覧
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        ガイド
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        お問い合わせ
+        %i.fas.fa-angle-right
+  .nav__head
+    = "メルペイ"
+  %ul
+    %li
+      = link_to do
+        売上・振込申請
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        ポイント
+        %i.fas.fa-angle-right
+  .nav__head
+    = "設定"
+  %ul
+    %li
+      = link_to do
+        プロフィール
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        発行元・お届け先住所変更
+        %i.fas.fa-angle-right
+    %li
+      = link_to cards_path do
+        支払い方法
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        メール/パスワード
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        本人情報
+        %i.fas.fa-angle-right
+    %li
+      = link_to do
+        電話番号の確認
+        %i.fas.fa-angle-right
+    %li
+      = link_to destroy_user_session_path, method: :delete do
+        ログアウト
+        %i.fas.fa-angle-right

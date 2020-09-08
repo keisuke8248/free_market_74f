@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'products#index'
   resources :products do
     collection do
+      get 'search'
       get 'category/get_category_children', to: 'products#get_category_children', defaults: { format: 'json' }
       get 'category/get_category_grandchildren', to: 'products#get_category_grandchildren', defaults: { format: 'json' }
     end
@@ -19,9 +20,15 @@ Rails.application.routes.draw do
     end
 
   end
+  resources :comments, only:[:create,:update,:destroy] do
+    member do
+      get 'restore'
+    end
+  end
   devise_for :users, controllers: {
     sessions:      'users/sessions',
     passwords:     'users/passwords',
+    omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations'
   }
   devise_for :destinations, controllers: {
