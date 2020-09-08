@@ -22,5 +22,5 @@ class FavoritesController < ApplicationController
       redirect_to product_path(params[:id])
     end
   end
-  
+
 end
