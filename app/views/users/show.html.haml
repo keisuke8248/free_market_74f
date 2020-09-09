@@ -4,7 +4,7 @@
   - count = 0
   - @products.each do |p|
     - if Favorite.exists?(user_id: current_user.id, product_id: p)
-      = link_to "/products/#{p.id}", {class: '.favorite--list'} do
+      = link_to product_path(p.id), {class: '.favorite--list'} do
         = image_tag p.images.first.image.to_s
         = p.name
       - count += 1
