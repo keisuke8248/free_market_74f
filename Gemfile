@@ -88,3 +88,12 @@ group :development, :test do
 end
 gem 'rails-i18n', '~> 5.1'
 gem 'devise-i18n'
+gem 'active_hash'
+gem 'payjp'
+gem 'jquery-rails'
+gem 'dotenv-rails'
+gem 'rspec-rails'
+gem 'factory_bot_rails'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection"

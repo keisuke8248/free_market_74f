@@ -23,6 +23,7 @@
 - has_many :seller_records, class_name: 'Product', dependent: :destroy
 - has_one :destination dependent: :destroy
 - has_one :card dependent: :destroy
+- has_many :comments dependent: :destroy
 
 
 ## destinationsテーブル
@@ -35,7 +36,7 @@
 |family_name_kana|string|null: false|
 |first_name_kane|string|null: false|
 |post_code|string|null: false|
-|prefecture|string|null: false|
+|prefecture_id|integer|null: false|
 |city|string|null: false|
 |address|string|null: false|
 |building_name|string||
@@ -97,6 +98,7 @@
 - has_many :images dependent: :destroy
 - accepts_nested_attributes_for :images,  allow_destroy: true
 - belongs_to_active_hash :prefecture
+- has_many :comments dependent: :destroy
 
 ## imagesテーブル
 
@@ -118,3 +120,27 @@
 
 ### Association
 - has_many :products
+
+
+## commentsテーブル
+
+|Column|Type|Options|
+|------|----|-------|
+|product_id|integer|null: false, foreign_key: true|
+|user_id|integer|null: false, foreign_key: true|
+|delete_check|integer|default: 0|
+|comment|string||
+
+### Association
+- belongs_to :product
+- belongs_to :user
+
+## favoritesテーブル
+|Column|Type|Options|
+|------|----|-------|
+|user_id|integer|null: false, foreign_key: true|
+|product_id|integer|null: false, foreign_key: true|
+
+### Association
+- belongs_to :product
+- belongs_to :user

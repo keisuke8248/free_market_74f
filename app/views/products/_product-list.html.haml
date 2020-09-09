@@ -14,7 +14,7 @@
       - break if count > 4
       .product--list__product.effect-fade
         = link_to "/products/#{product.id}" do
-          = image_tag product.images.first.image, { class: 'product--list__product__image'}
+          = image_tag product.images.first.image.to_s, { class: 'product--list__product__image'}
           .product--list__product__content
             .product--list__product__name
               #{product.name}

@@ -1,0 +1,22 @@
+.breadCrumbs
+  %ul
+    %li
+      = link_to "フリマ", "/"
+    - if @product.category.parent.parent.present?
+      %li
+        = link_to @product.category.parent.parent.name, "#"
+    %li
+      = link_to @product.category.parent.name, "#"
+    %li
+      = link_to @product.category.name, "#"
+    %li
+      = link_to @product.name, product_path(@product.id)
+    - if current_page?(action: :show)
+      %li
+        購入内容の確認
+    - else
+      %li
+        = link_to "購入内容の確認", "/products/#{@product.id}/purchase/#{@product.id}"
+    - if current_page?(action: :card)
+      %li
+        カード変更

@@ -1,3 +1,4 @@
+= stylesheet_link_tag "products-show", :media => "all"
 .main
   .showMain
     .mainContent
@@ -7,18 +8,22 @@
         .itemBox__image
           %ul
             %li
-              = image_tag @product.images.first.image, class: "itemBox__image--large"
+              = image_tag @product.images.first.image.to_s, class: "itemBox__image--large"
               %ul.itemBox__image--small
+                - num = 0
                 - @product.images.each do |image|
-                  %li= image_tag image.image, width: "75", height: "75"
+                  %li= image_tag image.image.to_s, id: num, class:"imageSelection"
+                  - num += 1
         .itemBox__price
-          %span= "¥" + @product.price
+          %span= "¥" + @product.price.to_i.to_s(:delimited)
           .itemBox__price__detail
             %span (税込)
             %span 送料込み
 
-        - if user_signed_in? && current_user.id != @product.buyer_id
-          = link_to "購入画面に進む", root_path, class: "itemBox__btn"
+        - if @product.buyer_id.present?
+          .itemBox__sold 売り切れました
+        - elsif user_signed_in? && current_user.id != @product.seller_id
+          = link_to "購入画面に進む", "/products/#{@product.id}/purchase/#{@product.id}", method: :get, class: "itemBox__btn"
 
         .itemBox__description
           = @product.description
@@ -27,18 +32,28 @@
             %th 
               出品者
             %td
-              = @product.buyer.nickname
+              = @product.seller.nickname
           %tr
             %th
               カテゴリー
             %td
-              = @product.category.name
+              - if @product.category.parent.parent.nil?
+                .products-children
+                  = link_to @product.category.parent.name, "#"
+                .products-grandchildren
+                  = link_to @product.category.name, "#"
+              - else
+                .products-info
+                  = link_to @product.category.parent.parent.name, "#"
+                .products-children
+                  = link_to @product.category.parent.name, "#"
+                .products-grandchildren
+                  = link_to @product.category.name, "#"
           %tr
             %th
               ブランド
             %td
-
-              = @product.brand.name
+              = @product.brand
           %tr
             %th
               サイズ
@@ -48,13 +63,13 @@
             %th
               商品の状態
             %td
-              = @product.status
+              = Status.find(@product.status).name
           %tr
             %th
               配送料の負担
               - if @product.cost.present?
                 %td
-                  = @product.cost + "円 (購入者負担)"
+                  = Cost.find(@product.cost).name
               - else
                 %td
                   送料込み (出品者負担)
@@ -62,13 +77,73 @@
             %th
               発送元の地域
             %td
-              = @product.prefecture_id
+              = @product.prefecture.name
           %tr
             %th
               発送日の目安
             %td
-              = @product.days + "日で発送"
+              = Days.find(@product.days).name
 
-        - if user_signed_in? && current_user.id == @product.buyer_id
+        - if user_signed_in? && current_user.id == @product.seller_id
           = link_to "編集", edit_product_path(@product.id), class: "itemBox__btn"
           = link_to "削除", product_path(@product.id), method: "DELETE", class: "itemBox__btn"
+
+        -# ===================================
+        -# コメント全体
+        -# ===================================
+        .commentBox
+          .comment_list
+            - if user_signed_in?
+              - @commentALL.each do |comment|
+                - if comment.user_id == current_user.id
+                  -#   ===================================
+                  -#   コメントユーザーとログインユーザーが同一の場合  
+                  -#   =================================== 
+                  .comment_Me.comment_one_block{data:{index: comment.id}}
+                    - if comment.delete_check == 1   # 削除済の場合
+                      .comment_content
+                        = render 'comment_delete_restore_btn',comment: comment 
+                    - else # 削除されていない場合
+                      .comment_content
+                        = comment.comment
+                        .comment_create_at
+                          = comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
+                        - if comment.product.seller == current_user
+                          .comment_delete.me_pre_delete{data:{index: comment.id}}     
+                            = link_to '削除する', comment_path(comment.id) ,method: :patch
+                    = render 'comment_name',comment: comment
+
+                - else
+                  -#   ===================================
+                  -#   コメントユーザーとログインユーザーが異なる場合の場合  
+                  -#   ===================================
+                  .comment_Other.comment_one_block{data:{index: comment.id}}    
+                    = render 'comment_name',comment: comment               
+                    - if comment.delete_check == 1   # 削除済の場合
+                      .comment_content_other
+                        = render 'comment_delete_restore_btn',comment: comment
+                    - else    # 削除されていない場合
+                      .comment_content_other
+                        = comment.comment
+                        .comment_create_at
+                          = comment.created_at.strftime("%Y年%m月%d日 %H時%M分")
+                        - if comment.product.seller == current_user   # 出品者とログインユーザーが等しい場合
+                          .comment_delete.other_pre_delete{data:{index: comment.id}}     
+                            = link_to '削除する', comment_path(comment.id) ,method: :patch
+        -#   ===================================
+        -#   投稿フォーム
+        -#   ===================================
+        - if user_signed_in?     
+          = form_with model:@comment ,class:"new_comment", local: true do |f|
+            = f.text_area :comment,id: "comment_body",wrap: "soft"
+            = f.hidden_field :product_id, value: @product.id
+
+            %p.noticeMsg
+              相手のことを考えて丁寧なコメントをこころがけましょう。
+              %br/
+              不快な言葉遣いなどは利用制限や退会処分となることがあります。
+            %br/
+            %button.commentBtn{name: "button", type: "submit"}
+              %i.fa.fa-comment
+              コメントする
+      = render partial: "breadCrumbs"

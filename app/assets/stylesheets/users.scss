@@ -161,3 +161,356 @@ main {
   border-color:#2cccd4;
   background-color:#fff;
 }
+
+
+.container {
+  margin: 24px 0 auto;
+}
+.area {
+  width: 100%;
+  margin: auto;
+  flex-wrap: wrap;
+  display: flex;
+}
+.item__link {
+  display: block;
+  height: 59.422px;
+  padding: 16px;
+  color: #333;
+  a {
+    text-decoration: none;
+  }
+  figure {
+    position: relative;
+    margin: 0;
+    float: left;
+    width: 40px;
+    height: 40px;
+    background-image: url(/images/material/icon/icon_brand.png);
+    background-size: cover;
+  }
+}
+.item__body {
+  margin: 0 40px 0 68px;
+  time {
+    color: #888;
+  }
+}
+.icon-time {
+  color: #888;
+  font-size: 13px;
+}
+.tab__class {
+  width: calc(100%/2);
+  background-color: rgb(230, 230, 230);
+  font-size: 16px;
+  line-height: 72px;
+  text-align: center;
+  display: block;
+  float: left;
+  order: -1;
+  cursor: pointer;
+}
+
+input {
+  &[name="tab_name_1"] {
+    display: none;
+  }
+
+  &:checked + .tab__class {
+    background-color: white;
+    color: black;
+    border-top: solid 2px #2cccd4;
+  }
+}
+
+.content__class {
+  display: none;
+  width: 100%;
+}
+
+input:checked + .tab__class + .content__class {
+  display: block;
+  background-color: white;
+}
+
+input {
+  &[name="tab_name_2"] {
+    display: none;
+  }
+
+  &:checked + .tab__class {
+    background-color: white;
+    color: black;
+  }
+}
+.not-found {
+  margin: 37.5px auto;
+  background-image: url(/images/material/icon/icon_brand.png);
+  filter: saturate(0);
+  width: 78px;
+  height: 85px;
+  background-size: cover;
+  border-bottom: none;
+  &__text{
+    text-align: center;
+    padding-bottom: 60px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #ccc;
+  }
+}
+.mypage-tab-head {
+  margin-top: 40px;
+  width: 100%;
+  padding: 0 4%;
+  background: #fafafa;
+  font-size: 16px;
+  line-height: 72px;
+  font-weight: bold;
+}
+
+.content__class {
+  padding: 0;
+  list-style-type: none;
+  margin: 0;
+  width: 100%;
+  ul {
+    margin: 0;
+  }
+  a {
+    font-size: 14px;
+    margin: 0 auto;
+    display: block;
+    padding: 16px;
+    background-color: white;
+    text-decoration: none;
+    color: #555555;
+    position: relative;
+    &:hover {
+      background-color: #f8f8f8;
+    }
+    .fas.fa-angle-right {
+      position: absolute;
+      right: 16px;
+      top: 35%;
+      font-size: 25px;
+    }
+  }
+  li {
+    border-bottom: 1px solid #eee;
+  }
+}
+.mypage-go-list {
+  padding: 16px;
+  background-color: white;
+  a {
+    padding: 0;
+    display: block;
+    height: 56px;
+    margin: 0 auto;
+    background: #eee;
+    color: #333;
+    line-height: 56px;
+    text-align: center;
+  }
+}
+.nav ul {
+  padding: 0;
+  list-style-type: none;
+  margin: 0;
+  width: 100%;
+  a {
+    height: 16px;
+    font-size: 14px;
+    margin: 0 auto;
+    display: block;
+    padding: 16px;
+    background-color: white;
+    text-decoration: none;
+    color: #555555;
+    position: relative;
+    &:hover {
+      background-color: #f8f8f8;
+      .fas.fa-angle-right {
+        position: absolute;
+        right: 12px;
+        color: rgb(51, 51, 51);
+      }
+    }
+    .fas.fa-angle-right {
+      position: absolute;
+      font-size: 23px;
+      right: 16px;
+      top: 27%;
+      color: rgb(219, 219, 219);
+    }
+  }
+  li {
+    border-top: 1px solid #eee;
+    .active {
+      background: #eee;
+      font-weight: 600;
+      .fas.fa-angle-right {
+        color: rgb(51, 51, 51);
+      }
+    }
+  }
+}
+
+/* リスト */
+.breadcrumbs {
+  position: relative;
+  border-top: 1px solid #eee;
+  box-shadow: 0 3px 3px 0 rgba(0,0,0,0.16);
+  background: #fff;
+  z-index: 1;
+  ol {
+    margin: 0 auto;
+    padding: 16px;
+    list-style-type: none;
+    font-size: 14px;
+    li {
+      display: inline;
+      a {
+        color: #333;
+      }
+    }
+    li:last-child {
+      font-weight: 600;
+    }
+    .fas.fa-angle-right {
+      margin: 0 8px;
+      color: #888;
+      font-size: 1.2em 
+    }
+  }
+}
+.breadcrumbs__btn {
+  text-decoration: none;
+}
+
+.mypage {
+  &__background {
+    position: relative;
+    padding: 20px;
+    height: 115px;
+    background-image: url("/images/light_00021.jpg");
+    background-size: cover;
+    a {
+      display: block;
+      height: 111px;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translate(0, -50%);
+      color: #333;
+    }
+  }
+  &__icon {
+    display: flex;
+    width: 100%;
+    margin: 0;
+    align-items: center;
+    justify-content: center; 
+    img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+  &__name {
+    position: absolute;
+    margin: 8px 0 0;
+    font-size: 14px;
+    font-weight: 600;
+    top: 50%;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center; 
+  }
+  &__number {
+    position: absolute;
+    margin: 8px 0 0;
+    top: 75%;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center; 
+    font-size: 14px;
+  }
+}
+.nav__head {
+  margin: 40px 4% 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+.nav {
+  margin-top: 40px;
+}
+
+@media (min-width: 768px) {
+  .content {
+    width: 700px;
+    margin: 0 auto;
+  }
+  .mypage__background {
+    height: 160px;
+    object-fit: cover;
+  }
+  .breadcrumbs ol {
+    overflow: visible;
+    width: 700px;
+    margin: 0 auto;
+    padding: 16px 0;
+    white-space: normal;
+  }
+  .nav__head {
+    margin: 40px 0 0;
+  }
+  .mypage-tab-head {
+    padding: 0 16px;
+  }
+}
+@media (min-width: 1068px) {
+  .container {
+    display: flex;
+    flex-flow: row-reverse;
+    justify-content: space-around;
+    margin: 40px auto 0;
+    width: 1020px;
+    padding: 0 0 40px;
+  }
+  .nav__list {
+    a {
+      width: 248px;
+      height: 16px;
+    }
+  }
+  .content {
+    width: 700px;
+  }
+  .content__class {
+    .nav__list {
+      a {
+        width: 100%;
+        height: 16px;
+      }
+    }
+  }
+  .breadcrumbs ol {
+    width: 1020px;
+    overflow: visible;
+    margin: 0 auto;
+    padding: 16px 0;
+    white-space: normal;
+  }
+  .nav {
+    width: 280px;
+    margin: 0 40px 0 0;
+  }
+  .item__link {
+    height: 48px;
+  }
+}
