@@ -78,6 +78,15 @@ ActiveRecord::Schema.define(version: 2020_08_23_145251) do
     t.index ["user_id"], name: "index_destinations_on_user_id"
   end
 
+  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_favorites_on_product_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
   create_table "images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.string "image", null: false
@@ -142,6 +151,8 @@ ActiveRecord::Schema.define(version: 2020_08_23_145251) do
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
   add_foreign_key "destinations", "users"
+  add_foreign_key "favorites", "products"
+  add_foreign_key "favorites", "users"
   add_foreign_key "images", "products"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "users", column: "seller_id"
