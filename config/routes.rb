@@ -13,7 +13,11 @@ Rails.application.routes.draw do
     resources :purchase, only: [:show, :create] do
       member do
         post 'create'
+        post 'pay'
+        get 'card'
         delete 'destroy'
+        get 'done'
+        get 'fail'
       end
     end
     resources :favorites, only: [:show, :create, :destroy] do

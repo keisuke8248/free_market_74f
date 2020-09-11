@@ -1,7 +1,5 @@
-//= stylesheet_link_tag "_top-page", :media => "all"
-= stylesheet_link_tag "users", :media => "all"
-= stylesheet_link_tag "cards", :media => "all"
-//= render 'products/header'
+= stylesheet_link_tag "users", media: "all"
+= stylesheet_link_tag "cards", media: "all"
 - month = @card_information.exp_month.to_s
 - year = @card_information.exp_year.to_s[ 2 ... 4 ]
 .container
