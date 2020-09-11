@@ -20,5 +20,11 @@
           = link_to "更新する", card_path, method: :delete
       .card__info
         ※登録できるカードは一枚のみです
+    .breadCrumbs
+      %ul
+        %li= link_to "トップページ", "/"
+        %li= link_to "マイページ", users_path(current_user.id)
+        %li 支払い方法 
+
   = render 'users/nav'
 = render 'layouts/footer'
