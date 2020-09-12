@@ -43,8 +43,11 @@ class ProductsController < ApplicationController
 
   def update
     product = Product.find(params[:id])
-    product.update(product_params)
-    redirect_to action: 'edit'
+    if product.update(product_params)
+      redirect_to root_path
+    else
+      redirect_to edit_product_path
+    end
   end
 
   def destroy

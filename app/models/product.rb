@@ -10,6 +10,7 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :images, allow_destroy: true
   validates :seller_id, :name, :description, :status, :category_id, :prefecture_id, :cost, :days, :price, presence: true
   validates :price, presence: true, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999}
+  validates :images, length: { minimum: 1, maximum: 10, message: "の数が不正です" }
   
   def self.search(search)
     if search

@@ -51,10 +51,12 @@
                   カテゴリー
                   %span.sell-title__require
                     必須
-              .category-area
-                .category-area__choose-space
-                  = f.collection_select :category_id, Category.all, :id, :name, {prompt: '選択してください'}, {class: 'sell-collection_input',required: "required"}
-                  -# = f.collection_select :category_id, Category.where(ancestry: nil), :id, :name, {prompt: '---'}, {id: 'parent_category'}
+              .sell-collection_category
+                = f.label :category_id, {class: 'sell-collection_category__label'} do
+                  = f.collection_select :category_id, Category.where(ancestry: nil), :id, :name, {include_blank: "選択してください", selected: @product.category.root.id}, {class: 'sell-collection_input', id: 'category_select',required: "required"}
+                  = f.collection_select :category_id, @product.category.parent.siblings, :id, :name, {include_blank: "選択してください", selected: @product.category.parent.id}, {class: 'sell-collection_input', id: 'child_category',required: "required"}
+                  = f.collection_select :category_id, @product.category.siblings, :id, :name, {include_blank: "選択してください"}, {class: 'sell-collection_input', id: 'grandchild_category',required: "required"}
+                  %i.fas.fa-chevron-down
               .sell-collection__select
                 .sell-title__text
                   ブランド
