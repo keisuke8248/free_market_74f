@@ -1,5 +1,7 @@
 class ProductsController < ApplicationController
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :login_check, only: [:new, :edit, :update, :destroy]
+
   def index
     @category_parent = Category.where(ancestry: nil)
     @products = Product.all.order(id: "DESC")
@@ -7,7 +9,6 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
     @favorite = Favorite.new
     @comment = Comment.new
     @commentALL = @product.comments
@@ -39,14 +40,19 @@ class ProductsController < ApplicationController
 
 
   def edit
+    @category_parent = Category.roots
   end
 
   def update
+    if @product.update(product_params)
+      redirect_to root_path
+    else
+      redirect_to edit_product_path
+    end
   end
 
   def destroy
     render :layout => nil
-    @product = Product.find(params[:id])
     unless @product.seller_id == current_user.id && @product.destroy
       redirect_to product_path(@product.id)
     end
@@ -67,6 +73,11 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    params.require(:product).permit(:id, :buyer_id, :name, :category_id, :brand, :status, :cost, :size, :judgment, :prefecture_id, :days, :price, :description, :seller_id, images_attributes: [:image]).merge(seller_id: current_user.id)
+    params.require(:product).permit(:id, :buyer_id, :name, :category_id, :brand, :status, :cost, :size, :judgment, :prefecture_id, :days, :price, :description, :seller_id, images_attributes: [:image, :_destroy, :id]).merge(seller_id: current_user.id)
   end
+
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
 end
