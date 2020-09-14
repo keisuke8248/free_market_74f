@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: ["show", "edit", "update", "destroy"]
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :login_check, only: [:new, :edit, :update, :destroy]
 
   def index
     @category_parent = Category.where(ancestry: nil)
@@ -8,6 +9,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    @favorite = Favorite.new
     @comment = Comment.new
     @commentALL = @product.comments
   end
@@ -21,7 +23,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    if @product.images.present? && @product.save
+    if @product.images.present? && @product.save 
       redirect_to root_path
     else
       redirect_to  new_product_path
@@ -63,6 +65,13 @@ class ProductsController < ApplicationController
   end
 
   private
+
+  def login_check
+    unless user_signed_in?
+      redirect_to new_user_path
+    end
+  end
+
   def product_params
     params.require(:product).permit(:id, :buyer_id, :name, :category_id, :brand, :status, :cost, :size, :judgment, :prefecture_id, :days, :price, :description, :seller_id, images_attributes: [:image, :_destroy, :id]).merge(seller_id: current_user.id)
   end

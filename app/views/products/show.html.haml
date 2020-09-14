@@ -1,4 +1,4 @@
-= stylesheet_link_tag "products-show", :media => "all"
+= stylesheet_link_tag "products-show", media: "all"
 .main
   .showMain
     .mainContent
@@ -88,6 +88,11 @@
           = link_to "編集", edit_product_path(@product.id), class: "itemBox__btn"
           = link_to "削除", product_path(@product.id), method: "DELETE", class: "itemBox__btn"
 
+        - if user_signed_in?
+          - if !Favorite.exists?(user_id:current_user.id, product_id:@product.id)
+            = link_to "いいね！", product_favorites_path(@product.id), method: :post, class: "itemBox__btn"
+          - else
+            = link_to "いいね！解除", product_favorite_path(@product.id), method: :delete, class: "itemBox__btn"
         -# ===================================
         -# コメント全体
         -# ===================================

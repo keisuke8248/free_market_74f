@@ -54,7 +54,7 @@
               %span
                 = required
                 %br/
-              = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {}, {class: 'input__select'}
+              = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt: "--"}, {class: 'input__select'}
           - if resource.errors[:prefecture]
             #error_explanation
               = resource.errors.full_messages_for(:prefecture).first

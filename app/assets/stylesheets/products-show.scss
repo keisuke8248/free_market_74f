@@ -16,6 +16,10 @@ li {
   list-style: none;
 }
 
+.itemBox__image li {
+  width: 100%;
+}
+
 .itemBox__image--small li {
   width: 25%;
   margin: 0 10px 0 0;
