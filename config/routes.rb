@@ -35,13 +35,11 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations'
   }
-  devise_for :destinations, controllers: {
-    sessions:      'destinations/sessions',
-    passwords:     'destinations/passwords',
-    registrations: 'destinations/registrations'
-  }
+  devise_scope :user do
+    get 'destinations', to: 'users/registrations#destination'
+    post 'destinations', to: 'users/registrations#create_destination'
+  end
   resources :users
-  resources :destinations
   resources :images
   resources :brands
   resources :categorys
