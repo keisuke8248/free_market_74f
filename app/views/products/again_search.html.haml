@@ -1,45 +1,7 @@
 = stylesheet_link_tag "_top-page", media: "all"
 = stylesheet_link_tag "_search-list", media: "all"
 = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
-.header
-  .header__up
-    .header__title
-      = link_to image_tag("/images/material/logo/logo.png", class: "header__title--text"), root_path
-    = form_with(url: search_products_path, local: true, method: :get, class: "header__search--form") do |f|
-      = f.text_field :keyword, value: "#{@search_name}", class: "header__search"
-      .header__search__info
-        = button_tag type: :submit, class: "header__search--tag" do
-          = image_tag("/images/material/icon/icon-search 1.png", class: "header__search--btn")
-  .header__menu
-    .header__menu--left
-      .header__menu--category
-        = link_to "カテゴリー", "#", class: "header__menu--btn"
-        = link_to image_tag("/images/material/icon/icon_category.png", class: "header__menu--btn__icon")
-        %ul.category__parent.category__list
-          - @parents.each do |parent|
-            %li
-              = link_to "#", class: "category__parent--name" do
-                = parent.name
-              %ul.category__child.category__list
-                - parent.children.each do |child|
-                  %li
-                    = link_to "#", class: "category__child--name" do
-                      = child.name
-                    %ul.category__grandchild.category__list
-                      - child.children.each do |grandchild|
-                        %li
-                          = link_to "#", class: " category__child--name" do
-                            = grandchild.name
-      .header__menu--brand
-        = link_to "ブランド", "#", class: "header__menu--btn"
-      .header__menu--brand-tag
-        = link_to image_tag("/images/material/icon/icon_brand.png", class: "header__menu--btn__icon")
-    .header__menu--right
-      - if user_signed_in?
-        = link_to "マイページ", users_path, class: "header__menu--btn"
-      - else
-        = link_to "ログイン", new_user_session_path, class: "header__menu--btn", id: "right-btn"
-        = link_to "新規会員登録", new_user_registration_path, class: "header__menu--btn"
+= render 'header'
 .wrapper
   .again-search
     = search_form_for @search, url: again_search_products_path do |f|
@@ -134,15 +96,10 @@
         .button-area__search
           = f.submit "完了", class: "button-area__search--btn"
   .main
-    - if @search_name == ""
-      .search-text
-        = "検索結果"
-    - else
-      %span.search-text
-        = @search_name
-      の検索結果
+    .search-text
+      = "検索結果"
     .product__all
-      - @products.each do |product|
+      - @search_products.each do |product|
         %ul.product__list
           %li.product__content
             = link_to product_path(product.id) do

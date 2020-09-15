@@ -76,7 +76,7 @@
 |Column|Type|Options|
 |------|----|-------|
 |name|string|null: false|
-|price|string|null: false|
+|price|integer|null: false|
 |description|string|null: false|
 |status|string|null: false|
 |size|string|
