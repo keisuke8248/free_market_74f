@@ -13,13 +13,17 @@ Rails.application.routes.draw do
     end
     resources :purchase, only: [:show, :create] do
       member do
+        post 'create'
         post 'pay'
+        get 'card'
+        delete 'destroy'
         get 'done'
         get 'fail'
-        get 'card'
-        post 'create'
       end
     end
+    resources :favorites, only: [:show, :create, :destroy] do
+    end
+
   end
   resources :comments, only:[:create,:update,:destroy] do
     member do
@@ -32,13 +36,11 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations'
   }
-  devise_for :destinations, controllers: {
-    sessions:      'destinations/sessions',
-    passwords:     'destinations/passwords',
-    registrations: 'destinations/registrations'
-  }
+  devise_scope :user do
+    get 'destinations', to: 'users/registrations#destination'
+    post 'destinations', to: 'users/registrations#create_destination'
+  end
   resources :users
-  resources :destinations
   resources :images
   resources :brands
   resources :categorys

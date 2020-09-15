@@ -1,5 +1,5 @@
 document.addEventListener(
-  "DOMContentLoaded", e => {
+  "turbolinks:load", e => {
     if (document.getElementById("token_submit") != null) {
       Payjp.setPublicKey("pk_test_17f2f80ac0b9fc7c17a70eff");
       let btn = document.getElementById("token_submit");
@@ -23,11 +23,29 @@ document.addEventListener(
             document.inputForm.submit();
           } else {
             $("#alert").empty();
-            $("card_number").val("");
-            $("cvc").val("");
-            $("exp_month").val("");
-            $("exp_year").val("");
-            $("#alert").append("カード情報が正しくありません")
+            $(".blank__alert").empty();
+
+            let message = "必須項目です"
+
+            if ((card['number']) == "") {
+              $('#number').append(message);
+            } 
+            if ((card['exp_month']) == "" || (card['exp_year']) == "") {
+              $('#date').append(message);
+            } 
+            if ((card['cvc']) == "") {
+              $('#cvc_number').append(message);
+            }
+            if ((card['number']) != "" &&
+                (card['exp_month']) != "" &&
+                (card['exp_year']) != "" &&
+                (card['cvc']) != "") {
+                  $("#card_number").val("");
+                  $("#cvc").val("");
+                  $("#exp_month").val("");
+                  $("#exp_year").val("");
+                  $("#alert").append("カード情報が正しくありません");
+                }
           }
         });
       });

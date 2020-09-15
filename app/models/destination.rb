@@ -3,7 +3,7 @@ class Destination < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable
-  belongs_to :user
+  belongs_to :user, optional: true
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :prefecture
 

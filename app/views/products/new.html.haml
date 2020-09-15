@@ -1,3 +1,4 @@
+= stylesheet_link_tag "products", media: "all"
 %main
   %section.sell-container
     = form_for @product do |f|
@@ -29,7 +30,6 @@
             %span.sell-title__require
               必須
         = f.text_area :description, class: 'sell-container__content__description', required: "required", rows: '7', maxlength: '1000', placeholder: text_placeholder
-        .error-messages#error-text
         
       .sell-container__content
         %h3.sell-sub-head 商品の詳細

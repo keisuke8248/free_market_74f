@@ -1,2 +1,11 @@
-申し訳ありません
-この商品はすでに売却されています
+= stylesheet_link_tag "_top-page", media: "all"
+= stylesheet_link_tag "_destroy-page", media: "all"
+= render 'products/header'
+%h2.font-style
+  %div 申し訳ありません
+  %div この商品はすでに売却されています
+= link_to "トップページへ戻る", root_path, class: "redirect-btn"
+= link_to new_product_path do
+  .purchaseBtn
+    %span.purchaseBtn__text 出品する
+    = image_tag("/images/material/icon/icon_camera.png", class: "purchaseBtn__icon")
