@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @products = Product.all.order(id: "DESC")
   end
 
   def new

@@ -1,21 +1,18 @@
 class PurchaseController < ApplicationController
+  before_action :find_product, except: :create
 
   require 'payjp'
 
   def show
     @destination = current_user.destination
-    @product = Product.find(params[:id])
-    card = Card.find_by(user_id: current_user.id)
+    @card = Card.find_by(user_id: current_user.id)
     if @product.buyer_id.present?
       redirect_to controller: :products, action: :show
-    elsif card.blank?
-      redirect_to controller: :cards, action: :new
-    elsif @destination.blank?
-      redirect_to ('/destinations/sign_up/'), id: current_user.id
-    else
+
+    elsif @card.present?
       Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
-      customer = Payjp::Customer.retrieve(card.customer_id)
-      @card_information = customer.cards.retrieve(card.card_id)
+      customer = Payjp::Customer.retrieve(@card.customer_id)
+      @card_information = customer.cards.retrieve(@card.card_id)
       card_brand = @card_information.brand
       case card_brand 
       when "Visa"
@@ -35,6 +32,7 @@ class PurchaseController < ApplicationController
   end
 
   def pay
+    card = Card.find_by(user_id: current_user.id)
     product = Product.find(params[:id])
     seller_id = product.seller_id
     buyer_id = product.buyer_id
@@ -42,8 +40,9 @@ class PurchaseController < ApplicationController
       redirect_to action: :fail
     elsif seller_id == current_user.id
       redirect_to root_path
+    elsif card.blank? || @destination = current_user.destination.blank?
+      redirect_to action: :show
     else
-      card = Card.find_by(user_id: current_user.id)
       Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
       Payjp::Charge.create(
       amount: product.price,
@@ -56,9 +55,11 @@ class PurchaseController < ApplicationController
   end
 
   def done
+    render :layout => nil
   end
 
   def fail
+    render :layout => nil
   end
 
   def card
@@ -79,6 +80,12 @@ class PurchaseController < ApplicationController
         redirect_to action: :card
       end
     end
+  end
+
+  private
+
+  def find_product
+    @product = Product.find(params[:id])
   end
 
 end

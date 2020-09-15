@@ -134,3 +134,13 @@
 ### Association
 - belongs_to :product
 - belongs_to :user
+
+## favoritesテーブル
+|Column|Type|Options|
+|------|----|-------|
+|user_id|integer|null: false, foreign_key: true|
+|product_id|integer|null: false, foreign_key: true|
+
+### Association
+- belongs_to :product
+- belongs_to :user

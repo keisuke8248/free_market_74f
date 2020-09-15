@@ -3,6 +3,7 @@ class CardsController < ApplicationController
   require "payjp"
 
   def show
+    @user = User.find(current_user.id)
     card = Card.find_by(user_id: current_user.id)
     if card.blank?
       redirect_to action: :new
@@ -29,6 +30,7 @@ class CardsController < ApplicationController
   end
 
   def new
+    @user = User.find(current_user.id)
     card = Card.find_by(user_id: current_user.id)
     redirect_to action: :show if card.present?
   end

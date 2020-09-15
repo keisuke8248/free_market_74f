@@ -1,3 +1,142 @@
-// Place all the styles related to the cards controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$main-color: #3CCACE;
+$changed-color: #299296;
+
+.card {
+  background-color: white;
+  padding-bottom: 24px;
+  &__header {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 24px 16px;
+    text-align: center;
+  }
+  &__content {
+    box-sizing: border-box;
+    border-top: 1px solid rgb(245, 245, 245);
+    margin: 0px auto;
+    max-width: 343px;
+    &__block:nth-of-type(n+2) {
+      margin-top: 32px;
+    }
+    &__block:last-child {
+      margin: 24px 0;
+    }
+    &__block #token_submit {
+      text-align: center;
+      background-color: $main-color;
+      border: none;
+      border-radius: 3px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1;
+      height: 48px;
+      cursor: pointer;
+    }
+    &__block #token_submit:hover {
+      background-color: $changed-color;
+    }
+    &__block {
+      width: 100%;
+      &__title {
+        margin: 16px 0;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 1.4em;
+      }
+      &__title #require {
+        background-color: $main-color;
+        font-size: 12px;
+        padding: 0 4px;
+        color: #fff;
+        border-radius: 2px;
+      }
+      &__logo {
+        display: flex;
+      }
+      &__logo img {
+        max-height: 22px;
+        margin: 5px;
+      }
+      &__selection span {
+        font-size: 14px;
+        margin: 0 5px;
+      }
+    }
+  }
+  &__content input:not(#token_submit), select {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    color: #222;
+    font-size: 16px;
+    line-height: 1;
+    height: 48px;
+    padding: 0 0 0 16px;
+    box-sizing: border-box;
+  }
+  &__content select {
+    padding: 0 64px 0 16px;
+  }
+  &__content input {
+    width: 100%;
+  }
+  #show {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__left {
+    &__header {
+      font-weight: bold;
+    }
+    &__main li {
+      font-size: 14px;
+    }
+    &__main li:nth-child(2) {
+      margin-top: 6px;
+    }
+    &__main {
+      margin-top: 32px;
+    }
+    &__main img {
+      margin-top: 8px;
+      max-height: 32px;
+      max-width: 48px;
+    }
+  }
+  &__right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__right a {
+    color: $main-color;
+    cursor: pointer;
+    font-weight: bold;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $main-color;
+    border-radius: 4px;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+  &__right a:hover {
+    color: $changed-color;
+    border-color: $changed-color;
+  }
+  &__info {
+    margin: 0px auto;
+    max-width: 343px;
+    text-align: right;
+    font-size: 14px;
+  }
+  #alert {
+    margin-top: 12px;
+    font-weight: 600;
+    height: 18px;
+    color: red;
+  }
+  .blank__alert {
+    color: $main-color;
+    font-weight: bold;
+  }
+}
