@@ -111,7 +111,6 @@ class ProductsController < ApplicationController
         :price_lteq,
         category_id_in: []
       )
-    end
   end
 
   def set_product
