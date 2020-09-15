@@ -14,7 +14,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
       pass = Devise.friendly_token
       params[:user][:password] = pass
       params[:user][:password_confirmation] = pass
-      super
+      @user = User.new(sign_up_params)
+      unless @user.valid?
+        flash.now[:alert] = @user.errors.full_messages
+        render :new and return
+      end
+      session["devise.regist_data"] = {user: @user.attributes}
+      session["devise.regist_data"][:user]["password"] = params[:user][:password]
+      @destination = @user.build_destination
+      render :destination
     else
       @user = User.new(sign_up_params)
       unless @user.valid?
