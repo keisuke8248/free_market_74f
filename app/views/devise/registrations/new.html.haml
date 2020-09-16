@@ -1,11 +1,11 @@
 %html
-  = stylesheet_link_tag "users", :media => "all"
+  = stylesheet_link_tag "users", media: "all"
   %body
     .title
       会員情報入力
     %main
       - required = "必須"
-      = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = form_for(@user, url: user_registration_path) do |f|
         .field__top
           .field__label
             = "ニックネーム"

@@ -1,2 +1,124 @@
-%h1 Products#edit
-%p Find me in app/views/products/edit.html.erb
+- if user_signed_in? && current_user
+  = form_for @product do |f|
+    %main
+      %section.sell-container
+        .sell-container__content
+          .sell-title
+            %h3.sell-title__text
+              出品画像
+              %span.sell-title__require 必須
+            %p 最大10枚アップロードできます
+            #image-box
+              #previews
+                - if @product.persisted?
+                  - @product.images.each.with_index(1) do |image, i|
+                    = image_tag image.image.url, data: { index: i }, width: "100", height: '100', alt: "preview", id: "saved-preview", class: 'img-preview'
+              = f.fields_for :images do |image|
+                .js-file_group{"data-index" => "#{image.index}"}
+                  - index = image.index
+                  = index+1
+                  = image.file_field :image, type: "file", id: 'js-file', class: "image-preview", data: { index: image.index }
+                  %br/
+                  %span.js-remove 削除
+                - if @product.persisted?
+                  = image.check_box :_destroy, data:{ index: image.index }, class: 'hidden-destroy'
+              - if @product.persisted?
+                %p 画像追加
+                .product-num-0#image-box__container
+                  .js-file_group{"data-index" => "#{@product.images.count}"}
+                    = f.file_field :image, type: 'file', name: "product[images_attributes][#{@product.images.count}][image]", id: 'new-file', class: "image-file"
+
+          .sell-container__content
+            .sell-title
+              %h3.sell-title__text
+                商品名
+                %span.sell-title__require
+                  必須
+            = f.text_field :name, {class:'sell-container__content__name', required: "required", placeholder: '商品名（必須 40文字まで)'}
+            .error-messages#error-name
+            .sell-title
+              %h3.sell-title__text
+                商品の説明
+                %span.sell-title__require
+                  必須
+            = f.text_area :description, class: 'sell-container__content__description', required: "required", rows: '7', maxlength: '1000', placeholder: "商品の説明（必須1,000文字以内）(色、素材、重さ、定価、注意点など）例）2010年頃に1万円で購入したジャケットです。ライトグレーで傷はありません。あわせやすいのでおすすめです。"
+            .error-messages#error-text
+          .sell-container__content
+            %h3.sell-sub-head 商品の詳細
+            .sell-container__content__details
+              .sell-title
+                .sell-title__text
+                  カテゴリー
+                  %span.sell-title__require
+                    必須
+              .sell-collection_category
+                = f.label :category_id, {class: 'sell-collection_category__label'} do
+                  = f.collection_select :category_id, Category.where(ancestry: nil), :id, :name, {include_blank: "選択してください", selected: @product.category.root.id}, {class: 'sell-collection_input', id: 'category_select',required: "required"}
+                  = f.collection_select :category_id, @product.category.parent.siblings, :id, :name, {include_blank: "選択してください", selected: @product.category.parent.id}, {class: 'sell-collection_input', id: 'child_category',required: "required"}
+                  = f.collection_select :category_id, @product.category.siblings, :id, :name, {include_blank: "選択してください"}, {class: 'sell-collection_input', id: 'grandchild_category',required: "required"}
+                  %i.fas.fa-chevron-down
+              .sell-collection__select
+                .sell-title__text
+                  ブランド
+                  %span.sell-title__option
+                    任意
+              .sell-collection_select
+                = f.text_field :brand, {class:'sell-container__content__name', placeholder: '例) シャネル'}
+              .sell-title
+                %h3.sell-title__text
+                  商品の状態
+                  %span.sell-title__require
+                    必須
+              .sell-collection_select
+                = f.collection_select :status, Status.all, :id, :name, {prompt: '選択してください'}, {class: 'sell-collection_input',required: "required"}
+            .sell-container__content
+              %h3.sell-sub-head
+                %p 配送について
+              .sell-container__content__delivery
+                .sell-title
+                  %h3.sell-title__text
+                    配送料の負担
+                    %span.sell-title__require
+                      必須
+                .sell-collection_select
+                  = f.collection_select :cost, Cost.all, :id, :name, {prompt: '選択してください'},  {class: 'sell-collection_input',required: "required"}
+                .sell-title
+                  %h3.sell-title__text
+                    発送元の地域
+                    %span.sell-title__require
+                      必須
+                .sell-collection_select
+                  = f.collection_select :prefecture_id, Prefecture.all, :id, :name, {prompt: '選択してください'}, {class: 'sell-collection_input',required: "required"}
+                .sell-title
+                  %h3.sell-title__text
+                    発送までの日数
+                    %span.sell-title__require
+                      必須
+                .sell-collection_select
+                  = f.collection_select :days, Days.all, :id, :name, {prompt: '選択してください'}, {class: 'sell-collection_input',required: "required"}
+            .sell-container__content
+              %h3.sell-sub-head
+                %p 販売価格(300〜9,999,999)
+              .sell-container__content__price
+                .sell-title
+                  %h3.sell-title__text
+                    販売価格
+                    %span.sell-title__require
+                      必須
+                .sell-container__content__price__form
+                  = f.label :price, class: 'sell-container__content__price__form__label' do
+                    ¥
+                    = f.number_field :price, {placeholder: '0', autocomplete:"off", class: 'sell-container__content__price__form__box', required: "required"}
+              .sell-container__content__commission
+                .sell-container__content__commission__left
+                  販売手数料 （10%）
+                .sell-container__content__commission__right
+              .sell-container__content__profit
+                .sell-container__content__profit__left
+                  販売利益
+                .sell-container__content__profit__right
+            .submit-btn
+              = f.submit '編集完了', class: 'submit-btn__sell-btn'
+              = link_to 'もどる', root_path, class: 'submit-btn__return-btn'
+- else
+  = link_to "ログインページに移動する", new_user_session_path 
