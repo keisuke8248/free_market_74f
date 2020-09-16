@@ -1,6 +1,8 @@
 .wrapper {
   width: 100%;
   display: flex;
+  padding: 0 50px;
+  background-color: #f8f8f8;
 }
 .search-text {
   font-size: 22px;
@@ -21,15 +23,193 @@
   }
   &__content {
     background-color: white;
-    margin: 26px 50px;
-    width: 220px;
+    margin: 26px 20px 0px;
+    width: 180px;
   }
   &__image {
     overflow: hidden;
     object-fit: cover;
     height: 150px;
+    width: 120px;
   }
   &__info {
     text-align: left;
   }
+}
+
+.again-search {
+  width: 250px;
+  background-color: white;
+  margin-top: 20px;
+  &__field {
+    height: 40px;
+    background-color: #f8f8f8;
+  }
+  &__title {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 16px 16px 0;
+  }
+  &__keyword, &__brand, &__price, &__status, &__cost, &__buyer{
+    font-size: 14px;
+    font-weight: bold;
+    margin: 20px 0;
+  }
+}
+.price-range {
+  &__input {
+    display: flex;
+    &--form {
+      z-index: 2;
+      height: 48px;
+      width: 100px;
+      margin: 0 auto;
+      padding: 0 16px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      background-color: white;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  }
+  &__swang {
+    margin-top: 13px;
+  }
+}
+
+.category-area {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.category-checkboxes {
+  display: flex;
+}
+
+#q_sorts {
+  z-index: 2;
+  height: 48px;
+  width: 248px;
+  padding: 0 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: white;
+  font-size: 16px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+#q_name_cont {
+  height: 48px;
+  padding: 10px 16px 8px;
+  margin: 0 20px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #fff;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+#q_brand_eq {
+  height: 48px;
+  padding: 10px 16px 8px;
+  margin: 0 20px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #fff;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+#price_range {
+  height: 48px;
+  padding: 10px 16px 8px;
+  margin: 10px 20px 10px 20px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #fff;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+#parent_category {
+  height: 48px;
+  padding: 10px 16px 8px;
+  margin: 20px 0 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #fff;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+#child_category {
+  height: 48px;
+  width: 248px;
+  padding: 10px 16px 8px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #fff;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+
+.checkbox__label {
+  display: flex;
+}
+.form_d {
+  width: 250px;
+}
+
+.text-area {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.button-area {
+  display: flex;
+  justify-content: space-around;
+  color: white;
+  margin-top: 20px;
+  &__all {
+    width: 100px;
+    height: 48px;
+    background: #aaa;
+    color: white;
+    line-height: 48px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-align: center;
+  }
+  &__clear {
+    &--btn {
+      color: white;
+      display: block;
+    }
+  }
+  &__search {
+    &--btn {
+      width: 100px;
+      height: 48px;
+      background: #3CCACE;
+      color: white;
+      line-height: 48px;
+      font-size: 14px;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-align: center;
+    }
+  }
+}
+
+
+.group-checkbox{
+  margin: 5px 30px;
 }
