@@ -18,10 +18,12 @@ class CommentsController < ApplicationController
 
   def update
     @comment.update(delete_check:1)
+    redirect_back(fallback_location: product_path)
   end
 
   def destroy
     @comment.destroy
+    redirect_back(fallback_location: product_path)
   end
 
   def restore
