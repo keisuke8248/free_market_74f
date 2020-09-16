@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :login_check, only: [:new, :edit, :update, :destroy]
+  before_action :correct_product, only:[:edit, :update, :destroy]
   def index
     @category_parent = Category.where(ancestry: nil)
     @products = Product.all.order(id: "DESC")
@@ -64,6 +65,13 @@ class ProductsController < ApplicationController
     unless user_signed_in?
       redirect_to new_user_path
     end
+  end
+
+  def correct_product
+    @product = current_user.products.find_by(id: params[:id])
+      unless @product
+        redirect_to root_url
+      end
   end
 
   def product_params
