@@ -59,7 +59,6 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @category_parent_array = ["---"]
     @category_parent_array = Category.where(ancestry: nil)
 
     if params[:q].present?
