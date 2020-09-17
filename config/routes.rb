@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :products do
     collection do
       get 'search'
+      get 'again_search'
       get 'category/get_category_children', to: 'products#get_category_children', defaults: { format: 'json' }
       get 'category/get_category_grandchildren', to: 'products#get_category_grandchildren', defaults: { format: 'json' }
     end
@@ -35,13 +36,11 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations'
   }
-  devise_for :destinations, controllers: {
-    sessions:      'destinations/sessions',
-    passwords:     'destinations/passwords',
-    registrations: 'destinations/registrations'
-  }
+  devise_scope :user do
+    get 'destinations', to: 'users/registrations#destination'
+    post 'destinations', to: 'users/registrations#create_destination'
+  end
   resources :users
-  resources :destinations
   resources :images
   resources :brands
   resources :categorys
