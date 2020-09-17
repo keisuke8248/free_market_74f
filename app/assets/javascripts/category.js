@@ -81,7 +81,7 @@ $(function(){
 
   // 子カテゴリー選択後のイベント
   $('.sell-collection_category').on('change', '#child_category', function(){
-    var child_category_id = $('#child_category option:selected').data('category'); //選択された子カテゴリーのidを取得
+    var child_category_id = $('#child_category option:selected').val(); //選択された子カテゴリーのidを取得
     if (child_category_id != "" ){ //子カテゴリーが初期値でないことを確認
       $.ajax({
         url: '/products/category/get_category_grandchildren',
