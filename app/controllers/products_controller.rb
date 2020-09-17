@@ -38,7 +38,6 @@ class ProductsController < ApplicationController
     @category_grandchildren = Category.find(params[:child_id]).children
   end
 
-
   def edit
     @category_parent = Category.roots
   end
