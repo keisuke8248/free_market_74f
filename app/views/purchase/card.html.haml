@@ -9,7 +9,7 @@
     .card
       .card__header
         クレジットカード情報入力
-      = form_with url: product_purchase_path, method: :post, class: "card__content", id: 'charge-form', html:{name: "inputForm"} do |f|
+      = form_with url: product_purchase_path, method: :post, class: "card__content", id: 'charge-form', html:{name: "inputForm"}, local: true do |f|
         .card__content__block
           .card__content__block__title
             %span カード番号

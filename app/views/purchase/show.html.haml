@@ -58,9 +58,9 @@
               %p= @destination.building_name if @destination.building_name.present?
               %p= "#{@destination.family_name} #{@destination.first_name}"
           - else
-            = link_to "登録してください", new_destination_registration_path, class: :destination__register
+            = link_to "登録してください", "#", class: :destination__register
         
         .submit
-          = form_with url: pay_product_purchase_path do |f|
+          = form_with url: pay_product_purchase_path, local: true do |f|
             = f.submit '購入する', class: :submit__btn
       = render partial: "breadCrumbs"
